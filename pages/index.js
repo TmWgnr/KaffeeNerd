@@ -4,7 +4,7 @@ import CoffeeList from "../components/CoffeeList";
 export default function Home() {
   return (
     <main>
-      <Heading>KaffeeListe</Heading>
+      <Heading>Kaffeesorten</Heading>
       <CoffeeList />
     </main>
   );
