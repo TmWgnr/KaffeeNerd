@@ -2,7 +2,7 @@ import Heading from ".";
 import { render, screen } from "@testing-library/react";
 
 test("test", () => {
-  render(<Heading>🐬</Heading>);
-  const element = screen.getByText("🐬");
+  render(<Heading>KaffeeListe</Heading>);
+  const element = screen.getByText("KaffeeListe");
   expect(element).toBeInTheDocument();
 });

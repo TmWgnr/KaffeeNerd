@@ -3,7 +3,7 @@ import CoffeeCard from "../CoffeeCard";
 import { coffees } from "../../lib/mock-data";
 
 const StyledList = styled.ul`
-  list-style-type: style none;
+  list-style: none;
   display: flex;
   flex-direction: column;
 `;
@@ -15,7 +15,7 @@ export default function CoffeeList() {
         {coffees.map((coffee) => {
           return (
             <CoffeeCard
-              key={coffee.key}
+              key={coffee.id}
               name={coffee.name}
               herkunft={coffee.herkunft}
               sorte={coffee.sorte}

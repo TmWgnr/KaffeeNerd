@@ -3,6 +3,7 @@ import styled from "styled-components";
 const StyledContainer = styled.div`
   display: flex;
   align-items: center;
+  flex-direction: column;
 `;
 
 const ListItem = styled.li`
@@ -11,19 +12,17 @@ const ListItem = styled.li`
   justify-content: space-around;
   margin: 5px;
   border: 1px solid;
-  border-radius: 10px;
+  border-radius: 5px;
 `;
 
-export default function CoffeeCard({ id, name, herkunft, sorte }) {
+export default function CoffeeCard({ name, herkunft, sorte }) {
   return (
-    <ListItem key={id}>
-      <div>
-        <StyledContainer>
-          <p>Name: {name}</p>
-          <p>Herkunft: {herkunft}</p>
-          <p>Sorte: {sorte}</p>
-        </StyledContainer>
-      </div>
+    <ListItem>
+      <StyledContainer>
+        <p>Name: {name}</p>
+        <p>Herkunft: {herkunft}</p>
+        <p>Sorte: {sorte}</p>
+      </StyledContainer>
     </ListItem>
   );
 }
