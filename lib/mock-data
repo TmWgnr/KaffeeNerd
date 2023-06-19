@@ -1,0 +1,17 @@
+export const coffees = [
+  {
+    name: "Black Ape",
+    herkunft: "Brasilien",
+    sorte: "Arabica",
+  },
+  {
+    name: "Oh Harvey",
+    herkunft: "Peru",
+    sorte: "Arabica",
+  },
+  {
+    name: "Guatemala Punk",
+    herkunft: "Guatemala",
+    sorte: "Robusta",
+  },
+];
