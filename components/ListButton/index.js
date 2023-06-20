@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 const StyledButton = styled.button`
   background-color: transparent;
   border: 1px solid black;
+  border-radius: 5px;
   padding: 15px 32px;
   margin: 5px 5px;
   text-align: center;
