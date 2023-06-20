@@ -1,11 +1,11 @@
-import Heading from "../components/Heading";
-import CoffeeList from "../components/CoffeeList";
+import BackgroundImage from "../components/BackgroundImage";
+import WelcomePage from "../components/WelcomePage";
 
 export default function Home() {
   return (
     <main>
-      <Heading>Kaffeesorten</Heading>
-      <CoffeeList />
+      <BackgroundImage />
+      <WelcomePage />
     </main>
   );
 }

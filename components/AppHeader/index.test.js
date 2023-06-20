@@ -1,8 +1,8 @@
-import Heading from ".";
+import AppHeader from ".";
 import { render, screen } from "@testing-library/react";
 
 test("test", () => {
-  render(<Heading>Kaffeesorten</Heading>);
-  const element = screen.getByText("Kaffeesorten");
+  render(<AppHeader>KAFFEENERD</AppHeader>);
+  const element = screen.getByText("KAFFEENERD");
   expect(element).toBeInTheDocument();
 });
