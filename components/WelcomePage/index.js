@@ -2,6 +2,7 @@ import styled from "styled-components";
 import AppHeader from "../AppHeader";
 import Link from "next/link";
 import Footer from "../Footer";
+import ListButton from "../ListButton";
 
 const StyledGreeting = styled.h2`
   text-align: center;
@@ -17,7 +18,6 @@ export default function WelcomePage() {
     <>
       <AppHeader>KAFFEENERD</AppHeader>
       <StyledGreeting>CIAO!</StyledGreeting>
-      <Link href="/listpage">hier gehts zur KaffeListe</Link>
       <Footer />
     </>
   );
