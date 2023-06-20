@@ -10,13 +10,11 @@ const StyledGreeting = styled.h2`
   font-size: 90px;
 `;
 
-const WelcomePage = () => {
+export default function WelcomePage() {
   return (
     <>
       <AppHeader>KAFFEENERD</AppHeader>
       <StyledGreeting>CIAO!</StyledGreeting>
     </>
   );
-};
-
-export default WelcomePage;
+}

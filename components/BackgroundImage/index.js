@@ -13,7 +13,7 @@ const StyledBackground = styled.img`
   z-index: -1;
 `;
 
-const BackgroundImage = () => {
+export default function BackgroundImage() {
   return (
     <div>
       <StyledBackground
@@ -23,6 +23,4 @@ const BackgroundImage = () => {
       />
     </div>
   );
-};
-
-export default BackgroundImage;
+}
