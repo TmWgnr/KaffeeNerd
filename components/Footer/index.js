@@ -16,7 +16,7 @@ export default function Footer() {
   return (
     <>
       <StyledFooter>
-        <ListButton></ListButton>
+        <ListButton />
       </StyledFooter>
     </>
   );
