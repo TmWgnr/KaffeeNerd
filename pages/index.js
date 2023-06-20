@@ -1,4 +1,3 @@
-import Heading from "../components/Heading";
 import BackgroundImage from "../components/BackgroundImage";
 import WelcomePage from "../components/WelcomePage";
 

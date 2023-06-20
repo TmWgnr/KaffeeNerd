@@ -6,7 +6,7 @@ const StyledGreeting = styled.h2`
   width: 100%;
   position: absolute;
   bottom: 0;
-  color: grey;
+  color: #333232;
   font-size: 90px;
 `;
 
