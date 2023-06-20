@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Heading from "../Heading";
+import AppHeader from "../AppHeader";
 
 const StyledGreeting = styled.h2`
   text-align: center;
@@ -13,7 +13,7 @@ const StyledGreeting = styled.h2`
 const WelcomePage = () => {
   return (
     <>
-      <Heading />
+      <AppHeader>KAFFEENERD</AppHeader>
       <StyledGreeting>CIAO!</StyledGreeting>
     </>
   );
