@@ -16,7 +16,7 @@ export default function HomeButton() {
   const router = useRouter();
 
   function handleClick() {
-    router.push("/pages");
+    router.push("/");
   }
 
   return <StyledButton onClick={handleClick}>Home</StyledButton>;
