@@ -13,12 +13,12 @@ const StyledButton = styled.button`
   font-size: 16px;
 `;
 
-export default function ListButton() {
+export default function HomeButton() {
   const router = useRouter();
 
   function handleClick() {
-    router.push("/listpage");
+    router.push("/");
   }
 
-  return <StyledButton onClick={handleClick}>Liste</StyledButton>;
+  return <StyledButton onClick={handleClick}>Home</StyledButton>;
 }

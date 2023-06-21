@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import ListButton from "../ListButton";
+import HomeButton from "../HomeButton";
 
 const StyledFooter = styled.footer`
   position: fixed;
@@ -17,6 +18,7 @@ export default function Footer() {
     <>
       <StyledFooter>
         <ListButton />
+        <HomeButton />
       </StyledFooter>
     </>
   );
