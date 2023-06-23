@@ -6,7 +6,7 @@ import Footer from "../../components/Footer";
 export default function CreatePage() {
   return (
     <main>
-      <AppHeader>Kaffeesorten</AppHeader>
+      <AppHeader>Neue Bohne</AppHeader>
       <CoffeeInputForm />
       <Footer />
     </main>
