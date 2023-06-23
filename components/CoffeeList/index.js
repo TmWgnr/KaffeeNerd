@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import CoffeeCard from "../CoffeeCard";
 import { coffees } from "../../lib/mock-data";
+import Link from "next/link";
 
 const StyledList = styled.ul`
   list-style: none;
@@ -24,6 +25,7 @@ export default function CoffeeList() {
           );
         })}
       </StyledList>
+      <Link href="/createpage">Create</Link>
     </>
   );
 }
