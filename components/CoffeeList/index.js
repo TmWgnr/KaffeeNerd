@@ -19,7 +19,7 @@ export default function CoffeeList() {
             <CoffeeCard
               key={coffee.id}
               name={coffee.name}
-              herkunft={coffee.herkunft}
+              origins={coffee.origins}
               sorte={coffee.sorte}
             />
           );

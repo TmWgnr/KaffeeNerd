@@ -15,12 +15,12 @@ const ListItem = styled.li`
   border-radius: 5px;
 `;
 
-export default function CoffeeCard({ name, herkunft, sorte }) {
+export default function CoffeeCard({ name, origins, sorte }) {
   return (
     <ListItem>
       <StyledContainer>
         <p>Name: {name}</p>
-        <p>Herkunft: {herkunft}</p>
+        <p>Herkunft: {origins}</p>
         <p>Sorte: {sorte}</p>
       </StyledContainer>
     </ListItem>
