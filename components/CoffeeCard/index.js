@@ -15,12 +15,24 @@ const ListItem = styled.li`
   border-radius: 5px;
 `;
 
+// const OriginItem = styled.li`
+//   list-style: none;
+//   display: flex;
+//   justify-content: space-around;
+//   margin: 5px;
+// `;
+
 export default function CoffeeCard({ name, origins, sorte }) {
   return (
     <ListItem>
       <StyledContainer>
         <p>Name: {name}</p>
-        <p>Herkunft: {origins}</p>
+        <p>Herkunft:</p>
+        <ul>
+          {origins.map((oneOrigin, index) => {
+            return <li key={index}>{oneOrigin}</li>;
+          })}
+        </ul>
         <p>Sorte: {sorte}</p>
       </StyledContainer>
     </ListItem>

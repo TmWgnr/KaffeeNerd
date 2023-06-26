@@ -8,11 +8,13 @@ const StyledList = styled.ul`
   display: flex;
   flex-direction: column;
   padding: 0;
+  margin-bottom: 100px;
 `;
 
 export default function CoffeeList() {
   return (
     <>
+      <Link href="/createpage">Create</Link>
       <StyledList>
         {coffees.map((coffee) => {
           return (
@@ -25,7 +27,6 @@ export default function CoffeeList() {
           );
         })}
       </StyledList>
-      <Link href="/createpage">Create</Link>
     </>
   );
 }

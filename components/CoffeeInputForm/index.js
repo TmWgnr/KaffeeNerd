@@ -6,19 +6,37 @@ import { coffees } from "../../lib/mock-data";
 
 export default function CoffeeInputForm() {
   const [newCoffee, setNewCoffee] = useState([]);
+  const [origins, setOrigins] = useState([""]);
+
+  const handleOneOriginsAdd = () => {
+    setOrigins((prevOrigins) => [...prevOrigins, ""]);
+  };
+
+  const handleOneOriginsRemove = (index) => {
+    const originsList = [...origins];
+    originsList.splice(index, 1);
+    setOrigins(originsList);
+  };
+
+  const handleOneOriginsChange = (event, index) => {
+    const { value: oneOriginsName } = event.target;
+    const originsList = [...origins];
+    originsList[index] = oneOriginsName;
+    setOrigins(originsList);
+  };
 
   function handleSubmit(event) {
     event.preventDefault();
 
     const data = new FormData(event.target);
     const formData = Object.fromEntries(data);
-
+    const originsCleared = origins.filter((oneOrigins) => oneOrigins !== "");
     const updatedCoffeeList = [
       ...coffees,
       {
         id: uid(),
         name: formData.name,
-        herkunft: formData.herkunft,
+        origins: [...originsCleared],
         sorte: formData.sorte,
       },
     ];
@@ -33,9 +51,35 @@ export default function CoffeeInputForm() {
           <label htmlFor="name">
             Name: <input id="name" name="name" type="input" />
           </label>
-          <label htmlFor="herkunft">
-            Herkunft: <input id="herkunft" name="herkunft" type="input" />
-          </label>
+          <div>
+            <span>Herkunft:</span>
+            {origins.map((oneOrigins, index) => (
+              <div key={index}>
+                <label htmlFor={`oneOrigins - ${index}`}></label>
+                <input
+                  name={`oneOrigins - ${index}`}
+                  type="input"
+                  id={`oneOrigins - ${index}`}
+                  value={oneOrigins}
+                  onChange={(event) => handleOneOriginsChange(event, index)}
+                />
+
+                {origins.length - 1 === index && origins.length < 4 && (
+                  <button type="button" onClick={handleOneOriginsAdd}>
+                    <span>+</span>
+                  </button>
+                )}
+                {origins.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={() => handleOneOriginsRemove(index)}
+                  >
+                    <span>-</span>
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
 
           <fieldset>
             Sorte:
@@ -54,7 +98,7 @@ export default function CoffeeInputForm() {
           <CoffeeCard
             key={coffee.id}
             name={coffee.name}
-            herkunft={coffee.herkunft}
+            origins={coffee.origins}
             sorte={coffee.sorte}
           />
         ))}
