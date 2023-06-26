@@ -3,18 +3,18 @@ export const coffees = [
     id: 1,
     name: "Black Ape",
     origins: ["Honduras"],
-    sorte: "Arabica",
+    sorts: ["arabica", "robusta"],
   },
   {
     id: 2,
     name: "Oh Harvey",
     origins: ["Peru"],
-    sorte: "Arabica",
+    sorts: ["arabica"],
   },
   {
     id: 3,
     name: "Guatemala Punk",
     origins: ["Guatemala"],
-    sorte: "Robusta",
+    sorts: ["robusta"],
   },
 ];

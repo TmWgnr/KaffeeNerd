@@ -22,7 +22,7 @@ export default function CoffeeList() {
               key={coffee.id}
               name={coffee.name}
               origins={coffee.origins}
-              sorte={coffee.sorte}
+              sorts={coffee.sorts}
             />
           );
         })}

@@ -7,6 +7,18 @@ import { coffees } from "../../lib/mock-data";
 export default function CoffeeInputForm() {
   const [newCoffee, setNewCoffee] = useState([]);
   const [origins, setOrigins] = useState([""]);
+  //   const [selectedSorts, setSelectedSorts] = useState([]);
+
+  //   const handleSortChange = (event) => {
+  //     const { value, checked } = event.target;
+  //     if (checked) {
+  //       setSelectedSorts((prevSelectedSorts) => [...prevSelectedSorts, value]);
+  //     } else {
+  //       setSelectedSorts((prevSelectedSorts) =>
+  //         prevSelectedSorts.filter((sort) => sort !== value)
+  //       );
+  //     }
+  //   };
 
   const handleOneOriginsAdd = () => {
     setOrigins((prevOrigins) => [...prevOrigins, ""]);
@@ -31,13 +43,22 @@ export default function CoffeeInputForm() {
     const data = new FormData(event.target);
     const formData = Object.fromEntries(data);
     const originsCleared = origins.filter((oneOrigins) => oneOrigins !== "");
+    let selectedSorts = [];
+
+    if (formData.arabica) {
+      selectedSorts.push("arabica");
+    }
+
+    if (formData.robusta) {
+      selectedSorts.push("robusta");
+    }
     const updatedCoffeeList = [
       ...coffees,
       {
         id: uid(),
         name: formData.name,
         origins: [...originsCleared],
-        sorte: formData.sorte,
+        sorts: selectedSorts,
       },
     ];
     setNewCoffee(updatedCoffeeList);
@@ -88,6 +109,11 @@ export default function CoffeeInputForm() {
               arabica
               <input type="checkbox" id="arabica" name="arabica" />
             </label>
+            <label>
+              {" "}
+              robusta
+              <input type="checkbox" id="robusta" name="robusta" />
+            </label>
           </fieldset>
 
           <button type="submit">hinzufügen</button>
@@ -99,7 +125,7 @@ export default function CoffeeInputForm() {
             key={coffee.id}
             name={coffee.name}
             origins={coffee.origins}
-            sorte={coffee.sorte}
+            sorts={coffee.sorts}
           />
         ))}
       </div>
