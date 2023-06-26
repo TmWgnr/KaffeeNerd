@@ -17,7 +17,7 @@ export default function ListButton() {
   const router = useRouter();
 
   function handleClick() {
-    router.push("/listpage");
+    router.push("/listpage/[index].js");
   }
 
   return <StyledButton onClick={handleClick}>Liste</StyledButton>;
