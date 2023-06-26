@@ -3,22 +3,12 @@ import { useState } from "react";
 import { uid } from "uid";
 import CoffeeCard from "../CoffeeCard";
 import { coffees } from "../../lib/mock-data";
+import { useRouter } from "next/router";
 
 export default function CoffeeInputForm() {
   const [newCoffee, setNewCoffee] = useState([]);
   const [origins, setOrigins] = useState([""]);
-  //   const [selectedSorts, setSelectedSorts] = useState([]);
-
-  //   const handleSortChange = (event) => {
-  //     const { value, checked } = event.target;
-  //     if (checked) {
-  //       setSelectedSorts((prevSelectedSorts) => [...prevSelectedSorts, value]);
-  //     } else {
-  //       setSelectedSorts((prevSelectedSorts) =>
-  //         prevSelectedSorts.filter((sort) => sort !== value)
-  //       );
-  //     }
-  //   };
+  const router = useRouter();
 
   const handleOneOriginsAdd = () => {
     setOrigins((prevOrigins) => [...prevOrigins, ""]);
@@ -37,33 +27,38 @@ export default function CoffeeInputForm() {
     setOrigins(originsList);
   };
 
-  function handleSubmit(event) {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
-    const data = new FormData(event.target);
-    const formData = Object.fromEntries(data);
+    const formData = new FormData(event.target);
+    const name = formData.get("name");
+    const arabicaChecked = formData.get("arabica");
+    const robustaChecked = formData.get("robusta");
+
     const originsCleared = origins.filter((oneOrigins) => oneOrigins !== "");
-    let selectedSorts = [];
+    const sorts = [];
 
-    if (formData.arabica) {
-      selectedSorts.push("arabica");
+    if (arabicaChecked) {
+      sorts.push("arabica");
     }
 
-    if (formData.robusta) {
-      selectedSorts.push("robusta");
+    if (robustaChecked) {
+      sorts.push("robusta");
     }
-    const updatedCoffeeList = [
-      ...coffees,
-      {
-        id: uid(),
-        name: formData.name,
-        origins: [...originsCleared],
-        sorts: selectedSorts,
-      },
-    ];
-    setNewCoffee(updatedCoffeeList);
-    console.log(updatedCoffeeList);
-  }
+
+    const newCoffeeEntry = {
+      id: uid(),
+      name: name,
+      origins: originsCleared,
+      sorts,
+    };
+
+    setNewCoffee((prevCoffee) => [...prevCoffee, newCoffeeEntry]);
+
+    coffees.push(newCoffeeEntry);
+
+    router.push(`/listpage/${newCoffeeEntry.id}`);
+  };
 
   return (
     <>
@@ -73,14 +68,14 @@ export default function CoffeeInputForm() {
             Name: <input id="name" name="name" type="input" />
           </label>
           <div>
-            <span>Herkunft:</span>
             {origins.map((oneOrigins, index) => (
               <div key={index}>
-                <label htmlFor={`oneOrigins - ${index}`}></label>
+                <span>Herkunft:</span>
+                <label htmlFor={`oneOrigins-${index}`}></label>
                 <input
-                  name={`oneOrigins - ${index}`}
+                  name={`oneOrigins-${index}`}
                   type="input"
-                  id={`oneOrigins - ${index}`}
+                  id={`oneOrigins-${index}`}
                   value={oneOrigins}
                   onChange={(event) => handleOneOriginsChange(event, index)}
                 />
@@ -119,6 +114,16 @@ export default function CoffeeInputForm() {
           <button type="submit">hinzufügen</button>
         </StyledInputForm>
       </StyledContainer>
+      {/* <div>
+        {coffees.map((coffee) => (
+          <CoffeeCard
+            key={coffee.id}
+            name={coffee.name}
+            origins={coffee.origins}
+            sorts={coffee.sorts}
+          />
+        ))}
+      </div> */}
       <div>
         {newCoffee.map((coffee) => (
           <CoffeeCard

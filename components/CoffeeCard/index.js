@@ -40,7 +40,7 @@ export default function CoffeeCard({ name, origins, sorts }) {
     <ListItem>
       <StyledContainer>
         <StyledName>Name:</StyledName>
-        <StyledListItem>{name}</StyledListItem>
+        <p>{name}</p>
 
         <StyledHerkunft>Herkunft:</StyledHerkunft>
         <StyledList>
