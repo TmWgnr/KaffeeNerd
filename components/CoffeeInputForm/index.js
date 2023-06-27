@@ -206,13 +206,14 @@ export default function CoffeeInputForm() {
             <option value="45">45ml</option>
             <option value="50">50ml</option>
           </select>
-
-          <button type="submit" disabled={!isFormValid()}>
-            hinzufügen
-          </button>
-          <button type="reset" disabled={isFormValid()} onClick={handleClick}>
-            abbrechen
-          </button>
+          <ButtonContainer>
+            <StyledButton1 type="submit" disabled={!isFormValid()}>
+              hinzufügen
+            </StyledButton1>
+            <StyledButton2 type="reset" onClick={handleClick}>
+              abbrechen
+            </StyledButton2>
+          </ButtonContainer>
         </StyledInputForm>
       </StyledContainer>
 
@@ -242,11 +243,42 @@ const StyledInputForm = styled.form`
 const StyledContainer = styled.div`
   display: flex;
   align-items: center;
-  display: flex;
+
   justify-content: space-around;
   margin: 5px;
   border: 1px solid;
   border-radius: 5px;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+`;
+
+const StyledButton1 = styled.button`
+  border: 1px solid;
+  border-radius: 5px;
+  border-color: green;
+  align-items: center;
+  flex-direction: row;
+  margin: 5px 5px 5px 5px;
+  padding: 5px 5px 5px 5px;
+  color: green;
+  background-color: transparent;
+`;
+
+const StyledButton2 = styled.button`
+  border: 1px solid;
+  border-radius: 5px;
+  border-color: red;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin: 5px 5px 5px 5px;
+  padding: 5px 5px 5px 5px;
+  color: red;
+  background-color: transparent;
 `;
 
 const StyledForm = styled.form`
