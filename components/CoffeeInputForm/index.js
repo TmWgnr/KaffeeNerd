@@ -186,7 +186,13 @@ export default function CoffeeInputForm() {
           <LabelContainer>
             <label htmlFor="grind">
               Mahlgrad:{" "}
-              <StyledInput id="grind" name="grind" type="number" step=".1" />
+              <StyledInput
+                placeholder="nenne deinen Mahlgrad z.B.: 2,6"
+                id="grind"
+                name="grind"
+                type="number"
+                step=".1"
+              />
             </label>
           </LabelContainer>
           <LabelContainer>
