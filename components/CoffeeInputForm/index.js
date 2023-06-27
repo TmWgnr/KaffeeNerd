@@ -41,6 +41,7 @@ export default function CoffeeInputForm() {
     const robustaChecked = formData.get("robusta");
     const fruchtigChecked = formData.get("fruchtig");
     const nussigChecked = formData.get("nussig");
+    const grind = formData.get("grind");
 
     const originsCleared = origins.filter((oneOrigins) => oneOrigins !== "");
     const sorts = [];
@@ -67,6 +68,7 @@ export default function CoffeeInputForm() {
       origins: originsCleared,
       sorts,
       aroma,
+      grind: grind,
     };
 
     setNewCoffee((prevCoffee) => [...prevCoffee, newCoffeeEntry]);
@@ -151,6 +153,9 @@ export default function CoffeeInputForm() {
               />
             </label>
           </fieldset>
+          <label htmlFor="grind">
+            Mahlgrad: <input id="grind" name="grind" type="number" step=".1" />
+          </label>
 
           <button type="submit">hinzufügen</button>
         </StyledInputForm>
@@ -164,6 +169,7 @@ export default function CoffeeInputForm() {
             origins={coffee.origins}
             sorts={coffee.sorts}
             aroma={coffee.aroma}
+            grind={coffee.grind}
           />
         ))}
       </div>

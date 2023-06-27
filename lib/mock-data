@@ -5,6 +5,7 @@ export const coffees = [
     origins: ["Honduras"],
     sorts: ["arabica", "robusta"],
     aroma: ["nussig/schokoladig"],
+    grind: 2.6,
   },
   {
     id: 2,
@@ -12,6 +13,7 @@ export const coffees = [
     origins: ["Peru"],
     sorts: ["arabica"],
     aroma: ["nussig/schokoladig"],
+    grind: 3.0,
   },
   {
     id: 3,
@@ -19,5 +21,6 @@ export const coffees = [
     origins: ["Guatemala"],
     sorts: ["robusta"],
     aroma: ["beerig/fruchtig"],
+    grind: 2.3,
   },
 ];

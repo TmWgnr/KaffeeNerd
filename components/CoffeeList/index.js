@@ -24,6 +24,7 @@ export default function CoffeeList() {
               origins={coffee.origins}
               sorts={coffee.sorts}
               aroma={coffee.aroma}
+              grind={coffee.grind}
             />
           );
         })}
