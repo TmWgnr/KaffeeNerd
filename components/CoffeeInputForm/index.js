@@ -13,6 +13,10 @@ export default function CoffeeInputForm() {
   const [milliliters, setMillliliters] = useState("");
   const router = useRouter();
 
+  const handleClick = () => {
+    const reset = router.push(`/listpage/${coffees.id}`);
+  };
+
   const isFormValid = () => {
     return (
       origins.every((oneOrigins) => oneOrigins !== "") &&
@@ -205,6 +209,9 @@ export default function CoffeeInputForm() {
 
           <button type="submit" disabled={!isFormValid()}>
             hinzufügen
+          </button>
+          <button type="reset" disabled={isFormValid()} onClick={handleClick}>
+            abbrechen
           </button>
         </StyledInputForm>
       </StyledContainer>
