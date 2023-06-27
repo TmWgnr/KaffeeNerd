@@ -43,6 +43,7 @@ export default function CoffeeCard({
   grind,
   grams,
   milliliters,
+  shop,
 }) {
   return (
     <ListItem>
@@ -73,6 +74,8 @@ export default function CoffeeCard({
         <StyledName>IN/OUT:</StyledName>
         <p>{grams}g</p>
         <p>{milliliters}ml</p>
+        <StyledName>Shop:</StyledName>
+        <p>{shop}</p>
       </StyledContainer>
     </ListItem>
   );

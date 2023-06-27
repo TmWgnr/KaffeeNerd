@@ -27,6 +27,7 @@ export default function CoffeeList() {
               grind={coffee.grind}
               grams={coffee.grams}
               milliliters={coffee.milliliters}
+              shop={coffee.shop}
             />
           );
         })}

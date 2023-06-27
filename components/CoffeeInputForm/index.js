@@ -13,7 +13,7 @@ export default function CoffeeInputForm() {
   const [milliliters, setMillliliters] = useState("");
   const router = useRouter();
 
-  const handleClick = () => {
+  const handleResetButton = () => {
     const reset = router.push(`/listpage/${coffees.id}`);
   };
 
@@ -65,6 +65,7 @@ export default function CoffeeInputForm() {
     const fruchtigChecked = formData.get("fruchtig");
     const nussigChecked = formData.get("nussig");
     const grind = formData.get("grind");
+    const shop = formData.get("shop");
 
     const originsCleared = origins.filter((oneOrigins) => oneOrigins !== "");
     const sorts = [];
@@ -94,6 +95,7 @@ export default function CoffeeInputForm() {
       grind: grind,
       grams: grams,
       milliliters: milliliters,
+      shop: shop,
     };
 
     setNewCoffee((prevCoffee) => [...prevCoffee, newCoffeeEntry]);
@@ -107,10 +109,12 @@ export default function CoffeeInputForm() {
     <>
       <StyledContainer>
         <StyledInputForm onSubmit={handleSubmit}>
-          <label htmlFor="name">
-            Name: <input id="name" name="name" type="input" />
-          </label>
-          <div>
+          <LabelContainer>
+            <label htmlFor="name">
+              Name: <input id="name" name="name" type="input" />
+            </label>
+          </LabelContainer>
+          <LabelContainer>
             {origins.map((oneOrigins, index) => (
               <div key={index}>
                 <span>Herkunft:</span>
@@ -138,26 +142,27 @@ export default function CoffeeInputForm() {
                 )}
               </div>
             ))}
-          </div>
-
-          <fieldset>
-            Sorte:
-            <label>
-              {" "}
-              arabica
-              <input type="checkbox" id="arabica" name="arabica" />
-            </label>
-            <label>
-              {" "}
-              robusta
-              <input type="checkbox" id="robusta" name="robusta" />
-            </label>
-          </fieldset>
-          <fieldset>
-            Aroma:
-            <label htmlFor="fruchtig">
+          </LabelContainer>
+          <LabelContainer>
+            <StyledFieldSet>
+              Sorte:
+              <StyledCheckboxLabel>
+                {" "}
+                arabica
+                <StyledInput type="checkbox" id="arabica" name="arabica" />
+              </StyledCheckboxLabel>
+              <StyledCheckboxLabel>
+                {" "}
+                robusta
+                <StyledInput type="checkbox" id="robusta" name="robusta" />
+              </StyledCheckboxLabel>
+            </StyledFieldSet>
+          </LabelContainer>
+          <StyledFieldSet>
+            <LabelContainer>Aroma:</LabelContainer>
+            <StyledRadioLabel htmlFor="fruchtig">
               beerig/fruchtig
-              <input
+              <StyledInput
                 type="radio"
                 name="aroma"
                 value="beerig/fruchtig"
@@ -165,10 +170,10 @@ export default function CoffeeInputForm() {
                 checked={aroma[0] === "beerig/fruchtig"}
                 onChange={onAromaChange}
               />
-            </label>
-            <label htmlFor="nussig">
+            </StyledRadioLabel>
+            <StyledRadioLabel htmlFor="nussig">
               nussig/schokoladig
-              <input
+              <StyledInput
                 type="radio"
                 name="aroma"
                 value="nussig/schokoladig"
@@ -176,41 +181,50 @@ export default function CoffeeInputForm() {
                 checked={aroma[0] === "nussig/schokoladig"}
                 onChange={onAromaChange}
               />
+            </StyledRadioLabel>
+          </StyledFieldSet>
+          <LabelContainer>
+            <label htmlFor="grind">
+              Mahlgrad:{" "}
+              <StyledInput id="grind" name="grind" type="number" step=".1" />
             </label>
-          </fieldset>
-          <label htmlFor="grind">
-            Mahlgrad: <input id="grind" name="grind" type="number" step=".1" />
-          </label>
+          </LabelContainer>
+          <LabelContainer>
+            <label htmlFor="grams">IN/OUT:</label>
+            <select id="grams" value={grams} onChange={handleGramsChange}>
+              <option value="8">8g</option>
+              <option value="9">9g</option>
+              <option value="10">10g</option>
+              <option value="17">17g</option>
+              <option value="18">18g</option>
+              <option value="19">19g</option>
+            </select>
 
-          <label htmlfor="grams">IN/OUT:</label>
-          <select id="grams" value={grams} onChange={handleGramsChange}>
-            <option value="8">8g</option>
-            <option value="9">9g</option>
-            <option value="10">10g</option>
-            <option value="17">17g</option>
-            <option value="18">18g</option>
-            <option value="19">19g</option>
-          </select>
-
-          <label htmlfor="milliliters"></label>
-          <select
-            id="milliliters"
-            value={milliliters}
-            onChange={handleMillilitersChange}
-            required
-          >
-            <option value="22">22ml</option>
-            <option value="24">24ml</option>
-            <option value="26">26ml</option>
-            <option value="42">42ml</option>
-            <option value="45">45ml</option>
-            <option value="50">50ml</option>
-          </select>
+            <label htmlFor="milliliters"></label>
+            <select
+              id="milliliters"
+              value={milliliters}
+              onChange={handleMillilitersChange}
+              required
+            >
+              <option value="22">22ml</option>
+              <option value="24">24ml</option>
+              <option value="26">26ml</option>
+              <option value="42">42ml</option>
+              <option value="45">45ml</option>
+              <option value="50">50ml</option>
+            </select>
+          </LabelContainer>
+          <LabelContainer>
+            <label htmlFor="shop">
+              Shop: <input id="shop" name="shop" type="input" />
+            </label>
+          </LabelContainer>
           <ButtonContainer>
             <StyledButton1 type="submit" disabled={!isFormValid()}>
               hinzufügen
             </StyledButton1>
-            <StyledButton2 type="reset" onClick={handleClick}>
+            <StyledButton2 type="reset" onClick={handleResetButton}>
               abbrechen
             </StyledButton2>
           </ButtonContainer>
@@ -236,24 +250,33 @@ export default function CoffeeInputForm() {
 }
 
 const StyledInputForm = styled.form`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  gap: 0.3rem;
+  justify-content: center;
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
-const StyledContainer = styled.div`
-  display: flex;
-  align-items: center;
-
-  justify-content: space-around;
-  margin: 5px;
-  border: 1px solid;
-  border-radius: 5px;
+const LabelContainer = styled.div`
+  display: grid;
+  gap: 0.3rem;
+  justify-items: center;
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
+  margin-top: 1rem;
+`;
+
+const StyledFieldSet = styled.fieldset`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
 `;
 
 const StyledButton1 = styled.button`
@@ -281,7 +304,27 @@ const StyledButton2 = styled.button`
   background-color: transparent;
 `;
 
-const StyledForm = styled.form`
+const StyledContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  margin-top: 1rem;
+`;
+
+const StyledInput = styled.input`
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+`;
+
+const StyledCheckboxLabel = styled.label`
+  display: flex;
+  align-items: center;
+`;
+
+const StyledRadioLabel = styled.label`
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
 `;
