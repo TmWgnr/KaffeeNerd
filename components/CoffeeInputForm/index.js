@@ -9,6 +9,11 @@ export default function CoffeeInputForm() {
   const [newCoffee, setNewCoffee] = useState([]);
   const [origins, setOrigins] = useState([""]);
   const router = useRouter();
+  const [aroma, setAroma] = useState([]);
+
+  const onAromaChange = (event) => {
+    setAroma([event.target.value]);
+  };
 
   const handleOneOriginsAdd = () => {
     setOrigins((prevOrigins) => [...prevOrigins, ""]);
@@ -34,6 +39,8 @@ export default function CoffeeInputForm() {
     const name = formData.get("name");
     const arabicaChecked = formData.get("arabica");
     const robustaChecked = formData.get("robusta");
+    const fruchtigChecked = formData.get("fruchtig");
+    const nussigChecked = formData.get("nussig");
 
     const originsCleared = origins.filter((oneOrigins) => oneOrigins !== "");
     const sorts = [];
@@ -46,11 +53,20 @@ export default function CoffeeInputForm() {
       sorts.push("robusta");
     }
 
+    if (fruchtigChecked) {
+      aroma.push("fruchtig");
+    }
+
+    if (nussigChecked) {
+      aroma.push("nussig");
+    }
+
     const newCoffeeEntry = {
       id: uid(),
       name: name,
       origins: originsCleared,
       sorts,
+      aroma,
     };
 
     setNewCoffee((prevCoffee) => [...prevCoffee, newCoffeeEntry]);
@@ -110,20 +126,36 @@ export default function CoffeeInputForm() {
               <input type="checkbox" id="robusta" name="robusta" />
             </label>
           </fieldset>
+          <fieldset>
+            Aroma:
+            <label htmlFor="fruchtig">
+              beerig/fruchtig
+              <input
+                type="radio"
+                name="aroma"
+                value="beerig/fruchtig"
+                id="fruchtig"
+                checked={aroma[0] === "beerig/fruchtig"}
+                onChange={onAromaChange}
+              />
+            </label>
+            <label htmlFor="nussig">
+              nussig/schokoladig
+              <input
+                type="radio"
+                name="aroma"
+                value="nussig/schokoladig"
+                id="nussig"
+                checked={aroma[0] === "nussig/schokoladig"}
+                onChange={onAromaChange}
+              />
+            </label>
+          </fieldset>
 
           <button type="submit">hinzufügen</button>
         </StyledInputForm>
       </StyledContainer>
-      {/* <div>
-        {coffees.map((coffee) => (
-          <CoffeeCard
-            key={coffee.id}
-            name={coffee.name}
-            origins={coffee.origins}
-            sorts={coffee.sorts}
-          />
-        ))}
-      </div> */}
+
       <div>
         {newCoffee.map((coffee) => (
           <CoffeeCard
@@ -131,6 +163,7 @@ export default function CoffeeInputForm() {
             name={coffee.name}
             origins={coffee.origins}
             sorts={coffee.sorts}
+            aroma={coffee.aroma}
           />
         ))}
       </div>

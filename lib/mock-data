@@ -4,17 +4,20 @@ export const coffees = [
     name: "Black Ape",
     origins: ["Honduras"],
     sorts: ["arabica", "robusta"],
+    aroma: ["nussig/schokoladig"],
   },
   {
     id: 2,
     name: "Oh Harvey",
     origins: ["Peru"],
     sorts: ["arabica"],
+    aroma: ["nussig/schokoladig"],
   },
   {
     id: 3,
     name: "Guatemala Punk",
     origins: ["Guatemala"],
     sorts: ["robusta"],
+    aroma: ["beerig/fruchtig"],
   },
 ];

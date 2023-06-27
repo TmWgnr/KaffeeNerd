@@ -23,6 +23,7 @@ export default function CoffeeList() {
               name={coffee.name}
               origins={coffee.origins}
               sorts={coffee.sorts}
+              aroma={coffee.aroma}
             />
           );
         })}
