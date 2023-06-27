@@ -35,7 +35,15 @@ const StyledListItem = styled.li`
   list-style: none;
 `;
 
-export default function CoffeeCard({ name, origins, sorts, aroma, grind }) {
+export default function CoffeeCard({
+  name,
+  origins,
+  sorts,
+  aroma,
+  grind,
+  grams,
+  milliliters,
+}) {
   return (
     <ListItem>
       <StyledContainer>
@@ -62,6 +70,9 @@ export default function CoffeeCard({ name, origins, sorts, aroma, grind }) {
         </StyledList>
         <StyledName>Mahlgrad:</StyledName>
         <p>{grind}</p>
+        <StyledName>IN/OUT:</StyledName>
+        <p>{grams}g</p>
+        <p>{milliliters}ml</p>
       </StyledContainer>
     </ListItem>
   );

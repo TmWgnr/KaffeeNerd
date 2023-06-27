@@ -8,8 +8,27 @@ import { useRouter } from "next/router";
 export default function CoffeeInputForm() {
   const [newCoffee, setNewCoffee] = useState([]);
   const [origins, setOrigins] = useState([""]);
-  const router = useRouter();
   const [aroma, setAroma] = useState([]);
+  const [grams, setGrams] = useState("");
+  const [milliliters, setMillliliters] = useState("");
+  const router = useRouter();
+
+  const isFormValid = () => {
+    return (
+      origins.every((oneOrigins) => oneOrigins !== "") &&
+      aroma.length > 0 &&
+      grams !== "" &&
+      milliliters !== ""
+    );
+  };
+
+  const handleGramsChange = (event) => {
+    setGrams(event.target.value);
+  };
+
+  const handleMillilitersChange = (event) => {
+    setMillliliters(event.target.value);
+  };
 
   const onAromaChange = (event) => {
     setAroma([event.target.value]);
@@ -69,6 +88,8 @@ export default function CoffeeInputForm() {
       sorts,
       aroma,
       grind: grind,
+      grams: grams,
+      milliliters: milliliters,
     };
 
     setNewCoffee((prevCoffee) => [...prevCoffee, newCoffeeEntry]);
@@ -157,7 +178,34 @@ export default function CoffeeInputForm() {
             Mahlgrad: <input id="grind" name="grind" type="number" step=".1" />
           </label>
 
-          <button type="submit">hinzufügen</button>
+          <label htmlfor="grams">IN/OUT:</label>
+          <select id="grams" value={grams} onChange={handleGramsChange}>
+            <option value="8">8g</option>
+            <option value="9">9g</option>
+            <option value="10">10g</option>
+            <option value="17">17g</option>
+            <option value="18">18g</option>
+            <option value="19">19g</option>
+          </select>
+
+          <label htmlfor="milliliters"></label>
+          <select
+            id="milliliters"
+            value={milliliters}
+            onChange={handleMillilitersChange}
+            required
+          >
+            <option value="22">22ml</option>
+            <option value="24">24ml</option>
+            <option value="26">26ml</option>
+            <option value="42">42ml</option>
+            <option value="45">45ml</option>
+            <option value="50">50ml</option>
+          </select>
+
+          <button type="submit" disabled={!isFormValid()}>
+            hinzufügen
+          </button>
         </StyledInputForm>
       </StyledContainer>
 
@@ -170,6 +218,8 @@ export default function CoffeeInputForm() {
             sorts={coffee.sorts}
             aroma={coffee.aroma}
             grind={coffee.grind}
+            grams={coffee.grams}
+            milliliters={coffee.milliliters}
           />
         ))}
       </div>

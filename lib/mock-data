@@ -6,6 +6,8 @@ export const coffees = [
     sorts: ["arabica", "robusta"],
     aroma: ["nussig/schokoladig"],
     grind: 2.6,
+    grams: 18,
+    milliliters: 45,
   },
   {
     id: 2,
@@ -14,6 +16,8 @@ export const coffees = [
     sorts: ["arabica"],
     aroma: ["nussig/schokoladig"],
     grind: 3.0,
+    grams: 19,
+    milliliters: 50,
   },
   {
     id: 3,
@@ -22,5 +26,7 @@ export const coffees = [
     sorts: ["robusta"],
     aroma: ["beerig/fruchtig"],
     grind: 2.3,
+    grams: 18.5,
+    milliliters: 45,
   },
 ];
