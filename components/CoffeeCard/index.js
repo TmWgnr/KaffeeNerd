@@ -1,10 +1,5 @@
+import React from "react";
 import styled from "styled-components";
-
-const StyledContainer = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-`;
 
 const ListItem = styled.li`
   list-style: none;
@@ -15,13 +10,50 @@ const ListItem = styled.li`
   border-radius: 5px;
 `;
 
-export default function CoffeeCard({ name, herkunft, sorte }) {
+const StyledContainer = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`;
+
+const StyledName = styled.p`
+  font-weight: bold;
+`;
+
+const StyledHerkunft = styled.p`
+  margin-bottom: 5px;
+  font-weight: bold;
+`;
+
+const StyledList = styled.ul`
+  margin: 0;
+  padding: 0;
+`;
+
+const StyledListItem = styled.li`
+  margin-bottom: 5px;
+  list-style: none;
+`;
+
+export default function CoffeeCard({ name, origins, sorts }) {
   return (
     <ListItem>
       <StyledContainer>
-        <p>Name: {name}</p>
-        <p>Herkunft: {herkunft}</p>
-        <p>Sorte: {sorte}</p>
+        <StyledName>Name:</StyledName>
+        <p>{name}</p>
+
+        <StyledHerkunft>Herkunft:</StyledHerkunft>
+        <StyledList>
+          {origins.map((oneOrigin, index) => (
+            <StyledListItem key={index}>{oneOrigin}</StyledListItem>
+          ))}
+        </StyledList>
+        <StyledHerkunft>Sorte:</StyledHerkunft>
+        <StyledList>
+          {sorts.map((oneSort, index) => (
+            <StyledListItem key={index}>{oneSort}</StyledListItem>
+          ))}
+        </StyledList>
       </StyledContainer>
     </ListItem>
   );
