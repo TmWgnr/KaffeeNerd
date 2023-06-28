@@ -59,6 +59,10 @@ export default function CoffeeInputForm() {
     const reset = router.push(`/listpage/${coffees.id}`);
   };
 
+  const isFormValid = () => {
+    return aroma.length > 0;
+  };
+
   const handleGramsChange = (event) => {
     setGrams(event.target.value);
   };
@@ -173,41 +177,40 @@ export default function CoffeeInputForm() {
           </div>
         ))}
 
-        <Label>Sorte:</Label>
+        <Label htmlFor="sorts">Sorte:</Label>
         <div>
-          <label>
+          <label htmlFor="sorts">
             arabica
-            <Input type="checkbox" id="arabica" name="arabica" />
+            <Input type="checkbox" id="sorts" name="arabica" />
           </label>
-          <label>
+          <label htmlFor="sorts">
             robusta
-            <Input type="checkbox" id="robusta" name="robusta" />
+            <Input type="checkbox" id="sorts" name="robusta" />
           </label>
         </div>
 
-        <Label>Aroma:</Label>
+        <Label htmlFor="aroma">Aroma:</Label>
         <div>
-          <label htmlFor="fruchtig">
+          <label htmlFor="aroma">
             beerig/fruchtig
             <Input
               type="radio"
-              name="aroma"
+              name="fruchtig"
               value="beerig/fruchtig"
-              id="fruchtig"
+              id="aroma"
               checked={aroma[0] === "beerig/fruchtig"}
               onChange={onAromaChange}
             />
           </label>
-          <label htmlFor="nussig">
+          <label htmlFor="aroma">
             nussig/schokoladig
             <Input
               type="radio"
-              name="aroma"
+              name="nussig"
               value="nussig/schokoladig"
-              id="nussig"
+              id="aroma"
               checked={aroma[0] === "nussig/schokoladig"}
               onChange={onAromaChange}
-              required
             />
           </label>
         </div>
@@ -223,10 +226,10 @@ export default function CoffeeInputForm() {
           required
         />
 
-        <Label>IN/OUT:</Label>
+        <Label htmlFor="inout">IN/OUT:</Label>
         <div>
           <select
-            id="grams"
+            id="inout"
             value={grams}
             onChange={handleGramsChange}
             required
@@ -241,7 +244,7 @@ export default function CoffeeInputForm() {
           </select>
 
           <select
-            id="milliliters"
+            id="inout"
             value={milliliters}
             onChange={handleMillilitersChange}
             required
@@ -260,7 +263,9 @@ export default function CoffeeInputForm() {
         <Input id="shop" name="shop" type="input" required />
 
         <ButtonContainer>
-          <Button type="submit">hinzufügen</Button>
+          <Button type="submit" disabled={!isFormValid()}>
+            hinzufügen
+          </Button>
           <Button type="reset" onClick={handleResetButton}>
             abbrechen
           </Button>
