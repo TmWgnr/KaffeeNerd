@@ -35,7 +35,16 @@ const StyledListItem = styled.li`
   list-style: none;
 `;
 
-export default function CoffeeCard({ name, origins, sorts }) {
+export default function CoffeeCard({
+  name,
+  origins,
+  sorts,
+  aroma,
+  grind,
+  grams,
+  milliliters,
+  shop,
+}) {
   return (
     <ListItem>
       <StyledContainer>
@@ -54,6 +63,19 @@ export default function CoffeeCard({ name, origins, sorts }) {
             <StyledListItem key={index}>{oneSort}</StyledListItem>
           ))}
         </StyledList>
+        <StyledHerkunft>Aroma:</StyledHerkunft>
+        <StyledList>
+          {aroma.map((oneAroma, index) => (
+            <StyledListItem key={index}>{oneAroma}</StyledListItem>
+          ))}
+        </StyledList>
+        <StyledName>Mahlgrad:</StyledName>
+        <p>{grind}</p>
+        <StyledName>IN/OUT:</StyledName>
+        <p>{grams}g</p>
+        <p>{milliliters}ml</p>
+        <StyledName>Shop:</StyledName>
+        <p>{shop}</p>
       </StyledContainer>
     </ListItem>
   );
