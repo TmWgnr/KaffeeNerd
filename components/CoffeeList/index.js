@@ -14,7 +14,6 @@ const StyledList = styled.ul`
 export default function CoffeeList() {
   return (
     <>
-      <Link href="/createpage">Create</Link>
       <StyledList>
         {coffees.map((coffee) => {
           return (

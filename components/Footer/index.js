@@ -7,9 +7,7 @@ const StyledFooter = styled.footer`
   left: 0;
   bottom: 0;
   width: 100%;
-  visibility: inherit;
-  border-top: 1px solid black;
-  color: black;
+  color: white;
   text-align: center;
 `;
 
