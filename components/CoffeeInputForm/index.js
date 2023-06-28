@@ -111,7 +111,14 @@ export default function CoffeeInputForm() {
         <StyledInputForm onSubmit={handleSubmit}>
           <LabelContainer>
             <label htmlFor="name">
-              Name: <input id="name" name="name" type="input" />
+              Name:{" "}
+              <input
+                id="name"
+                name="name"
+                type="input"
+                maxLength={30}
+                required
+              />
             </label>
           </LabelContainer>
           <LabelContainer>
@@ -125,6 +132,8 @@ export default function CoffeeInputForm() {
                   id={`oneOrigins-${index}`}
                   value={oneOrigins}
                   onChange={(event) => handleOneOriginsChange(event, index)}
+                  maxLength={30}
+                  required
                 />
 
                 {origins.length - 1 === index && origins.length < 4 && (
@@ -144,7 +153,7 @@ export default function CoffeeInputForm() {
             ))}
           </LabelContainer>
           <LabelContainer>
-            <StyledFieldSet>
+            <StyledFieldSet required>
               Sorte:
               <StyledCheckboxLabel>
                 {" "}
@@ -158,7 +167,7 @@ export default function CoffeeInputForm() {
               </StyledCheckboxLabel>
             </StyledFieldSet>
           </LabelContainer>
-          <StyledFieldSet>
+          <StyledFieldSet required>
             <LabelContainer>Aroma:</LabelContainer>
             <StyledRadioLabel htmlFor="fruchtig">
               beerig/fruchtig
@@ -180,6 +189,7 @@ export default function CoffeeInputForm() {
                 id="nussig"
                 checked={aroma[0] === "nussig/schokoladig"}
                 onChange={onAromaChange}
+                required
               />
             </StyledRadioLabel>
           </StyledFieldSet>
@@ -191,13 +201,21 @@ export default function CoffeeInputForm() {
                 id="grind"
                 name="grind"
                 type="number"
+                max="20.1"
                 step=".1"
+                required
               />
             </label>
           </LabelContainer>
           <LabelContainer>
             <label htmlFor="grams">IN/OUT:</label>
-            <select id="grams" value={grams} onChange={handleGramsChange}>
+            <select
+              id="grams"
+              value={grams}
+              onChange={handleGramsChange}
+              required
+            >
+              <option value="">--</option>
               <option value="8">8g</option>
               <option value="9">9g</option>
               <option value="10">10g</option>
@@ -213,6 +231,7 @@ export default function CoffeeInputForm() {
               onChange={handleMillilitersChange}
               required
             >
+              <option value="">--</option>
               <option value="22">22ml</option>
               <option value="24">24ml</option>
               <option value="26">26ml</option>
@@ -223,13 +242,11 @@ export default function CoffeeInputForm() {
           </LabelContainer>
           <LabelContainer>
             <label htmlFor="shop">
-              Shop: <input id="shop" name="shop" type="input" />
+              Shop: <input id="shop" name="shop" type="input" required />
             </label>
           </LabelContainer>
           <ButtonContainer>
-            <StyledButton1 type="submit" disabled={!isFormValid()}>
-              hinzufügen
-            </StyledButton1>
+            <StyledButton1 type="submit">hinzufügen</StyledButton1>
             <StyledButton2 type="reset" onClick={handleResetButton}>
               abbrechen
             </StyledButton2>
