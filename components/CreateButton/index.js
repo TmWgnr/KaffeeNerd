@@ -32,12 +32,9 @@ export default function CreateButton() {
 
 const ButtonContainer = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   margin-bottom: 100px;
-
-  @media (max-width: 768px) {
-    justify-content: center;
-  }
+  align-items: center;
 `;
 
 const StyledButton = styled.button`
@@ -45,4 +42,6 @@ const StyledButton = styled.button`
   border: none;
   color: grey;
   align-items: center;
+  display: flex;
+  justify-content: center;
 `;
