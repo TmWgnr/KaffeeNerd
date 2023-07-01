@@ -2,6 +2,7 @@ import styled from "styled-components";
 import CoffeeCard from "../CoffeeCard";
 import { coffees } from "../../lib/mock-data";
 import Link from "next/link";
+import EditButton from "../EditButton";
 
 const StyledList = styled.ul`
   list-style: none;
@@ -27,7 +28,9 @@ export default function CoffeeList() {
               grams={coffee.grams}
               milliliters={coffee.milliliters}
               shop={coffee.shop}
-            />
+            >
+              {" "}
+            </CoffeeCard>
           );
         })}
       </StyledList>

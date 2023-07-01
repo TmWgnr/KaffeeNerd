@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import EditButton from "../EditButton";
 
 const ListItem = styled.li`
   list-style: none;
@@ -48,6 +49,7 @@ export default function CoffeeCard({
   return (
     <ListItem>
       <StyledContainer>
+        <EditButton></EditButton>
         <StyledName>Name:</StyledName>
         <p>{name}</p>
 
