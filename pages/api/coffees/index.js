@@ -15,9 +15,9 @@ export default async function handler(request, response) {
 
   if (request.method === "POST") {
     try {
-      const coffeeData = request.body;
+      const coffeeData = JSON.parse(request.body);
+      console.log(coffeeData);
       await Coffee.create(coffeeData);
-
       response.status(201).json({ status: "coffee created" });
     } catch (error) {
       console.log(error);

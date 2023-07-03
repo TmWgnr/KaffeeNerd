@@ -11,6 +11,7 @@ export default async function handler(request, response) {
 
   if (request.method === "GET") {
     const coffee = await Coffee.findById(id);
+
     if (!coffee) {
       response.status(404).json({ status: "Not found" });
       return;

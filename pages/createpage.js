@@ -27,7 +27,7 @@ export default function CreateCoffeePage() {
   return (
     <main>
       <AppHeader>Neue Bohne</AppHeader>
-      <CoffeeInputForm onSubmit={addCoffee} formName={"add-coffee"} />
+      <CoffeeInputForm addCoffee={addCoffee} formName={"add-coffee"} />
       <Footer />
     </main>
   );

@@ -7,11 +7,10 @@ import useSWR, { mutate } from "swr";
 
 export default function CoffeeInputForm({
   addCoffee,
-  formName,
   editCoffee,
   defaultData,
 }) {
-  const [origins, setOrigins] = useState([""]);
+  const [origins, setOrigins] = useState(defaultData?.origins || [""]);
   const [arabicaChecked, setArabicaChecked] = useState(
     defaultData?.sorts?.includes("arabica") || false
   );
@@ -35,6 +34,7 @@ export default function CoffeeInputForm({
     return aroma.length > 0;
   };
 
+  //
   const handleGramsChange = (event) => {
     setGrams(event.target.value);
   };
@@ -59,12 +59,14 @@ export default function CoffeeInputForm({
     setOrigins((prevOrigins) => [...prevOrigins, ""]);
   };
 
+  // remove one Origin inputfield
   const handleOneOriginsRemove = (index) => {
     const originsList = [...origins];
     originsList.splice(index, 1);
     setOrigins(originsList);
   };
 
+  //update value of Origins
   const handleOneOriginsChange = (event, index) => {
     const { value: oneOriginsName } = event.target;
     const originsList = [...origins];
@@ -103,36 +105,34 @@ export default function CoffeeInputForm({
       aroma.push("nussig");
     }
 
-    const newCoffeeEntry = {
-      id: uid(),
+    const updatedCoffeeEntry = {
+      id: defaultData?.id || uid(),
       name: name,
       origins: originsCleared,
       sorts,
       aroma,
-      grind: grind,
-      grams: grams,
-      milliliters: milliliters,
+      grind: Number(grind),
+      grams: Number(grams),
+      milliliters: Number(milliliters),
       shop: shop,
     };
 
-    setCoffeeEntries((prevCoffeeEntries) => [
-      ...prevCoffeeEntries,
-      newCoffeeEntry,
-    ]);
-
-    const response = await fetch("/api/coffees", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newCoffeeEntry),
-    });
-
-    if (response.ok) {
-      mutate();
+    if (defaultData) {
+      // Update existing coffee entry
+      setCoffeeEntries((prevCoffeeEntries) =>
+        prevCoffeeEntries.map((coffee) =>
+          coffee.id === defaultData.id ? updatedCoffeeEntry : coffee
+        )
+      );
+      editCoffee(updatedCoffeeEntry);
+    } else {
+      // Add new coffee entry
+      setCoffeeEntries((prevCoffeeEntries) => [
+        ...prevCoffeeEntries,
+        updatedCoffeeEntry,
+      ]);
+      addCoffee(updatedCoffeeEntry);
     }
-
-    router.push("/listpage");
   };
 
   return (
@@ -208,10 +208,10 @@ export default function CoffeeInputForm({
             <Input
               type="radio"
               value="beerig/fruchtig"
+              defaultValue={defaultData?.aroma}
               id="aroma"
               checked={aroma[0] === "beerig/fruchtig"}
               onChange={onAromaChange}
-              defaultValue={defaultData?.aroma}
             />
           </label>
           <label htmlFor="aroma">
@@ -219,10 +219,10 @@ export default function CoffeeInputForm({
             <Input
               type="radio"
               value="nussig/schokoladig"
+              defaultValue={defaultData?.aroma}
               id="aroma"
               checked={aroma[0] === "nussig/schokoladig"}
               onChange={onAromaChange}
-              defaultValue={defaultData?.aroma}
             />
           </label>
         </div>
@@ -245,9 +245,9 @@ export default function CoffeeInputForm({
             name="inout"
             id="inout"
             value={grams}
+            defaultValue={defaultData?.grams}
             onChange={handleGramsChange}
             required
-            defaultValue={defaultData?.grams}
           >
             <option value="">--</option>
             <option value="8">8g</option>
@@ -261,9 +261,9 @@ export default function CoffeeInputForm({
           <select
             id="inout"
             value={milliliters}
+            defaultValue={defaultData?.milliliters}
             onChange={handleMillilitersChange}
             required
-            defaultValue={defaultData?.milliliters}
           >
             <option value="">--</option>
             <option value="22">22ml</option>
@@ -285,18 +285,11 @@ export default function CoffeeInputForm({
         />
 
         <ButtonContainer>
-          <Button type="submit" disabled={!isFormValid()} onSubmit={addCoffee}>
-            hinzufügen
+          <Button type="submit" disabled={!isFormValid()}>
+            {defaultData ? "Update coffee" : "hinzufügen"}
           </Button>
           <Button type="reset" onClick={handleResetButton}>
             abbrechen
-          </Button>
-          <Button
-            type="reset"
-            onClick={handleResetButton}
-            onSubmit={editCoffee}
-          >
-            {defaultData ? "Update coffee" : "Add coffee"}
           </Button>
         </ButtonContainer>
       </Form>

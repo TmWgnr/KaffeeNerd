@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import useSWR from "swr";
 import CoffeeInputForm from "../../../components/CoffeeInputForm/index.js";
+import AppHeader from "../../../components/AppHeader/index.js";
 
 export default function EditPage() {
   const router = useRouter();
@@ -32,9 +33,9 @@ export default function EditPage() {
 
   return (
     <>
-      <h2>Edit Place</h2>
+      <AppHeader>Alte Bohne Neuer Wert</AppHeader>
       <Link href={`/coffees/${id}`} passHref legacyBehavior>
-        <Link justifySelf="start">back</Link>
+        <Link justifyself="start">back</Link>
       </Link>
       <CoffeeInputForm
         editCoffee={editCoffee}

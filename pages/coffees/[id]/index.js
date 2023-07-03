@@ -3,16 +3,21 @@ import { useRouter } from "next/router.js";
 import useSWR from "swr";
 import styled from "styled-components";
 import React from "react";
+import AppHeader from "../../../components/AppHeader";
+import Footer from "../../../components/Footer";
 
 export default function DetailsPage() {
   const router = useRouter();
   const { isReady } = router;
   const { id } = router.query;
-  console.log(router.query);
 
-  const { data: coffee, isLoading, error } = useSWR(`/api/coffees/${id}`);
+  const {
+    data: coffee,
+    isLoading,
+    error,
+  } = useSWR(id ? `/api/coffees/${id}` : null);
 
-  if (!isReady || isLoading || error) return <h2>Loading...!!</h2>;
+  if (!isReady || isLoading || error || !coffee) return <h2>Loading...!!</h2>;
 
   //   function deleteCoffee() {
   //     console.log('deleted?');
@@ -20,6 +25,7 @@ export default function DetailsPage() {
 
   return (
     <>
+      <AppHeader>Details</AppHeader>
       <ListItem>
         <StyledContainer>
           <Link href={`/coffees/${id}/edit`} passHref legacyBehavior>
@@ -55,6 +61,7 @@ export default function DetailsPage() {
           <p>{coffee.shop}</p>
         </StyledContainer>
       </ListItem>
+      <Footer></Footer>
     </>
   );
 }

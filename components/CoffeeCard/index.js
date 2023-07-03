@@ -54,7 +54,7 @@ export default function CoffeeCard({
         <Link href={`/coffees/${id}`} passHref legacyBehavior>
           DETAILS
         </Link>
-        {/* <EditButton></EditButton> */}
+
         <StyledName>Name:</StyledName>
         <p>{name}</p>
 
