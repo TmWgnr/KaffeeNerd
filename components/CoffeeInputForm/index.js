@@ -8,7 +8,7 @@ import useSWR, { mutate } from "swr";
 export default function CoffeeInputForm({
   addCoffee,
   formName,
-
+  editCoffee,
   defaultData,
 }) {
   const [origins, setOrigins] = useState([""]);
@@ -157,7 +157,7 @@ export default function CoffeeInputForm({
               id={`oneOrigins-${index}`}
               onChange={(event) => handleOneOriginsChange(event, index)}
               maxLength={30}
-              defaultValue={defaultData?.oneOrigins}
+              defaultValue={defaultData?.origins[index] || ""}
               required
             />
 
@@ -291,13 +291,13 @@ export default function CoffeeInputForm({
           <Button type="reset" onClick={handleResetButton}>
             abbrechen
           </Button>
-          {/* <Button
+          <Button
             type="reset"
             onClick={handleResetButton}
             onSubmit={editCoffee}
           >
-            {defaultData ? "Update place" : "Add place"}
-          </Button> */}
+            {defaultData ? "Update coffee" : "Add coffee"}
+          </Button>
         </ButtonContainer>
       </Form>
 
