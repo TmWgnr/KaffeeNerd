@@ -2,61 +2,33 @@ import styled from "styled-components";
 import { useState } from "react";
 import { uid } from "uid";
 import CoffeeCard from "../CoffeeCard";
-import { coffees } from "../../lib/mock-data";
 import { useRouter } from "next/router";
+import useSWR, { mutate } from "swr";
 
-const FormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 50px;
-`;
+export default function CoffeeInputForm({
+  addCoffee,
+  formName,
 
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 1rem;
-`;
-
-const Label = styled.label`
-  margin-bottom: 0.5rem;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  padding: 0.5rem;
-  font-size: 1rem;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  accent-color: black;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  gap: 1rem;
-`;
-
-const Button = styled.button`
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  border-radius: 4px;
-  background-color: black;
-  color: white;
-  border: none;
-  cursor: pointer;
-`;
-
-export default function CoffeeInputForm() {
-  const [newCoffee, setNewCoffee] = useState([]);
+  defaultData,
+}) {
   const [origins, setOrigins] = useState([""]);
-  const [aroma, setAroma] = useState([]);
-  const [grams, setGrams] = useState("");
-  const [milliliters, setMillliliters] = useState("");
+  const [arabicaChecked, setArabicaChecked] = useState(
+    defaultData?.sorts?.includes("arabica") || false
+  );
+  const [robustaChecked, setRobustaChecked] = useState(
+    defaultData?.sorts?.includes("robusta") || false
+  );
+  const [aroma, setAroma] = useState(defaultData?.aroma || []);
+  const [grams, setGrams] = useState(defaultData?.grams || "");
+  const [milliliters, setMillliliters] = useState(
+    defaultData?.milliliters || ""
+  );
+  const [coffeeEntries, setCoffeeEntries] = useState([]);
+
   const router = useRouter();
 
   const handleResetButton = () => {
-    const reset = router.push(`/listpage/${coffees.id}`);
+    const reset = router.push(`/listpage/`);
   };
 
   const isFormValid = () => {
@@ -73,6 +45,14 @@ export default function CoffeeInputForm() {
 
   const onAromaChange = (event) => {
     setAroma([event.target.value]);
+  };
+
+  const handleArabicaChange = (event) => {
+    setArabicaChecked(event.target.checked);
+  };
+
+  const handleRobustaChange = (event) => {
+    setRobustaChecked(event.target.checked);
   };
 
   const handleOneOriginsAdd = () => {
@@ -92,7 +72,7 @@ export default function CoffeeInputForm() {
     setOrigins(originsList);
   };
 
-  const handleSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
 
     const formData = new FormData(event.target);
@@ -135,18 +115,38 @@ export default function CoffeeInputForm() {
       shop: shop,
     };
 
-    setNewCoffee((prevCoffee) => [...prevCoffee, newCoffeeEntry]);
+    setCoffeeEntries((prevCoffeeEntries) => [
+      ...prevCoffeeEntries,
+      newCoffeeEntry,
+    ]);
 
-    coffees.push(newCoffeeEntry);
+    const response = await fetch("/api/coffees", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newCoffeeEntry),
+    });
 
-    router.push(`/listpage/${newCoffeeEntry.id}`);
+    if (response.ok) {
+      mutate();
+    }
+
+    router.push("/listpage");
   };
 
   return (
     <FormContainer>
-      <Form onSubmit={handleSubmit}>
+      <Form onSubmit={onSubmit}>
         <Label htmlFor="name">Name:</Label>
-        <Input id="name" name="name" type="input" maxLength={30} required />
+        <Input
+          id="name"
+          name="name"
+          type="input"
+          maxLength={30}
+          defaultValue={defaultData?.name}
+          required
+        />
 
         {origins.map((oneOrigins, index) => (
           <div key={index}>
@@ -155,9 +155,9 @@ export default function CoffeeInputForm() {
               name={`oneOrigins-${index}`}
               type="input"
               id={`oneOrigins-${index}`}
-              value={oneOrigins}
               onChange={(event) => handleOneOriginsChange(event, index)}
               maxLength={30}
+              defaultValue={defaultData?.oneOrigins}
               required
             />
 
@@ -179,13 +179,25 @@ export default function CoffeeInputForm() {
 
         <Label htmlFor="sorts">Sorte:</Label>
         <div>
-          <label htmlFor="sorts">
+          <label htmlFor="arabica">
             arabica
-            <Input type="checkbox" id="sorts" name="arabica" />
+            <Input
+              type="checkbox"
+              id="robusta"
+              name="arabica"
+              checked={arabicaChecked}
+              onChange={handleArabicaChange}
+            />
           </label>
-          <label htmlFor="sorts">
+          <label htmlFor="robusta">
             robusta
-            <Input type="checkbox" id="sorts" name="robusta" />
+            <Input
+              type="checkbox"
+              id="robusta"
+              name="robusta"
+              checked={robustaChecked}
+              onChange={handleRobustaChange}
+            />
           </label>
         </div>
 
@@ -195,22 +207,22 @@ export default function CoffeeInputForm() {
             beerig/fruchtig
             <Input
               type="radio"
-              name="fruchtig"
               value="beerig/fruchtig"
               id="aroma"
               checked={aroma[0] === "beerig/fruchtig"}
               onChange={onAromaChange}
+              defaultValue={defaultData?.aroma}
             />
           </label>
           <label htmlFor="aroma">
             nussig/schokoladig
             <Input
               type="radio"
-              name="nussig"
               value="nussig/schokoladig"
               id="aroma"
               checked={aroma[0] === "nussig/schokoladig"}
               onChange={onAromaChange}
+              defaultValue={defaultData?.aroma}
             />
           </label>
         </div>
@@ -223,16 +235,19 @@ export default function CoffeeInputForm() {
           type="number"
           max="20.1"
           step=".1"
+          defaultValue={defaultData?.grind}
           required
         />
 
         <Label htmlFor="inout">IN/OUT:</Label>
         <div>
           <select
+            name="inout"
             id="inout"
             value={grams}
             onChange={handleGramsChange}
             required
+            defaultValue={defaultData?.grams}
           >
             <option value="">--</option>
             <option value="8">8g</option>
@@ -248,6 +263,7 @@ export default function CoffeeInputForm() {
             value={milliliters}
             onChange={handleMillilitersChange}
             required
+            defaultValue={defaultData?.milliliters}
           >
             <option value="">--</option>
             <option value="22">22ml</option>
@@ -260,20 +276,33 @@ export default function CoffeeInputForm() {
         </div>
 
         <Label htmlFor="shop">Shop:</Label>
-        <Input id="shop" name="shop" type="input" required />
+        <Input
+          id="shop"
+          name="shop"
+          type="input"
+          required
+          defaultValue={defaultData?.shop}
+        />
 
         <ButtonContainer>
-          <Button type="submit" disabled={!isFormValid()}>
+          <Button type="submit" disabled={!isFormValid()} onSubmit={addCoffee}>
             hinzufügen
           </Button>
           <Button type="reset" onClick={handleResetButton}>
             abbrechen
           </Button>
+          {/* <Button
+            type="reset"
+            onClick={handleResetButton}
+            onSubmit={editCoffee}
+          >
+            {defaultData ? "Update place" : "Add place"}
+          </Button> */}
         </ButtonContainer>
       </Form>
 
       <div>
-        {newCoffee.map((coffee) => (
+        {coffeeEntries.map((coffee) => (
           <CoffeeCard
             key={coffee.id}
             name={coffee.name}
@@ -283,9 +312,52 @@ export default function CoffeeInputForm() {
             grind={coffee.grind}
             grams={coffee.grams}
             milliliters={coffee.milliliters}
+            shop={coffee.shop}
           />
         ))}
       </div>
     </FormContainer>
   );
 }
+
+const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+`;
+
+const Label = styled.label`
+  margin-bottom: 0.5rem;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  accent-color: black;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+`;
+
+const Button = styled.button`
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+`;

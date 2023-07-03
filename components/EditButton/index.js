@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { useRouter } from "next/router";
 
-export default function EditButton() {
+export default function EditButton({ id }) {
   const router = useRouter();
 
   function handleClick() {
-    router.push("/editpage");
+    router.push(`/coffees/edit/${id}`);
   }
 
   return (

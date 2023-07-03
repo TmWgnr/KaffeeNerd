@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import EditButton from "../EditButton";
+// import EditButton from "../EditButton";
+import Link from "next/link";
 
 const ListItem = styled.li`
   list-style: none;
@@ -45,11 +46,15 @@ export default function CoffeeCard({
   grams,
   milliliters,
   shop,
+  id,
 }) {
   return (
     <ListItem>
       <StyledContainer>
-        <EditButton></EditButton>
+        <Link href={`/coffees/${id}`} passHref legacyBehavior>
+          DETAILS
+        </Link>
+        {/* <EditButton></EditButton> */}
         <StyledName>Name:</StyledName>
         <p>{name}</p>
 
