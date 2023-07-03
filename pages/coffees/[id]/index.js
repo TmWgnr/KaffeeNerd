@@ -5,6 +5,7 @@ import styled from "styled-components";
 import React from "react";
 import AppHeader from "../../../components/AppHeader";
 import Footer from "../../../components/Footer";
+import EditButton from "../../../components/EditButton";
 
 export default function DetailsPage() {
   const router = useRouter();
@@ -19,18 +20,13 @@ export default function DetailsPage() {
 
   if (!isReady || isLoading || error || !coffee) return <h2>Loading...!!</h2>;
 
-  //   function deleteCoffee() {
-  //     console.log('deleted?');
-  //   }
-
   return (
     <>
       <AppHeader>Details</AppHeader>
       <ListItem>
         <StyledContainer>
-          <Link href={`/coffees/${id}/edit`} passHref legacyBehavior>
-            Edit
-          </Link>
+          <EditButton id={id} />
+
           <StyledName>Name:</StyledName>
           <p>{coffee.name}</p>
 

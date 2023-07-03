@@ -34,6 +34,7 @@ export default function EditPage() {
   return (
     <>
       <AppHeader>Alte Bohne Neuer Wert</AppHeader>
+
       <Link href={`/coffees/${id}`} passHref legacyBehavior>
         <Link justifyself="start">back</Link>
       </Link>

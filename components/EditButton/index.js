@@ -5,7 +5,7 @@ export default function EditButton({ id }) {
   const router = useRouter();
 
   function handleClick() {
-    router.push(`/coffees/edit/${id}`);
+    router.push(`/coffees/${id}/edit`);
   }
 
   return (
