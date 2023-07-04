@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import EditButton from "../EditButton";
 import Link from "next/link";
+import DeleteButton from "../DeleteButton";
 
 const ListItem = styled.li`
   list-style: none;
@@ -52,7 +53,7 @@ export default function CoffeeCard({
     <ListItem>
       <StyledContainer>
         <EditButton id={id} />
-
+        <DeleteButton id={id} />
         <StyledName>Name:</StyledName>
         <p>{name}</p>
 

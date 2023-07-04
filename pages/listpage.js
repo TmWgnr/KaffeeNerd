@@ -20,7 +20,6 @@ export default function ListPage() {
         <AppHeader>Kaffeesorten</AppHeader>
         <CreateButton />
         <CoffeeList coffees={coffees} />
-
         <Footer />
       </main>
     );
