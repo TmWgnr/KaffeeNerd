@@ -1,7 +1,5 @@
 import styled from "styled-components";
 import CoffeeCard from "../CoffeeCard";
-import { coffees } from "../../lib/mock-data";
-import Link from "next/link";
 
 const StyledList = styled.ul`
   list-style: none;
@@ -11,14 +9,15 @@ const StyledList = styled.ul`
   margin-bottom: 100px;
 `;
 
-export default function CoffeeList() {
+export default function CoffeeList({ coffees }) {
   return (
     <>
       <StyledList>
         {coffees.map((coffee) => {
           return (
             <CoffeeCard
-              key={coffee.id}
+              id={coffee._id}
+              key={coffee._id}
               name={coffee.name}
               origins={coffee.origins}
               sorts={coffee.sorts}
@@ -27,7 +26,9 @@ export default function CoffeeList() {
               grams={coffee.grams}
               milliliters={coffee.milliliters}
               shop={coffee.shop}
-            />
+            >
+              {" "}
+            </CoffeeCard>
           );
         })}
       </StyledList>
