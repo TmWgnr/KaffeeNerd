@@ -27,8 +27,12 @@ export default async function handler(request, response) {
     response.status(200).json({ status: `Coffee ${id} updated` });
   }
 
-  // if (request.method === "DELETE") {
-  //   await Coffee.findByIdAndDelete(id);
-  //   response.status(200).json({ status: `Coffee ${id} deleted` });
-  // }
+  if (request.method === "DELETE") {
+    try {
+      await Coffee.findByIdAndDelete(id);
+      response.status(200).json({ status: `Coffee ${id} deleted` });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
 }

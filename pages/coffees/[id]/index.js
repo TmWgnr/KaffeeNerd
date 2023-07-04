@@ -6,17 +6,14 @@ import React from "react";
 import AppHeader from "../../../components/AppHeader";
 import Footer from "../../../components/Footer";
 import EditButton from "../../../components/EditButton";
+import DeleteButton from "../../../components/DeleteButton";
 
 export default function DetailsPage() {
   const router = useRouter();
   const { isReady } = router;
   const { id } = router.query;
 
-  const {
-    data: coffee,
-    isLoading,
-    error,
-  } = useSWR(id ? `/api/coffees/${id}` : null);
+  const { data: coffee, isLoading, error } = useSWR(`/api/coffees/${id}`);
 
   if (!isReady || isLoading || error || !coffee) return <h2>Loading...!!</h2>;
 
