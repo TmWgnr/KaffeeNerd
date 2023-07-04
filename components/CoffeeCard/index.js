@@ -53,7 +53,7 @@ export default function CoffeeCard({
     <ListItem>
       <StyledContainer>
         <EditButton id={id} />
-        <DeleteButton id={id} />
+        <DeleteButton id={id} name={name} />
         <StyledName>Name:</StyledName>
         <p>{name}</p>
 

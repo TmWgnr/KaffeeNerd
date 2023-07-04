@@ -2,8 +2,9 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import React from "react";
+import { confirmAlert } from "react-confirm-alert";
 
-export default function DeleteButton({ id }) {
+export default function DeleteButton({ id, name }) {
   const router = useRouter();
 
   async function deleteCoffee() {
@@ -13,9 +14,34 @@ export default function DeleteButton({ id }) {
     router.push(`/`);
   }
 
+  const submit = () => {
+    confirmAlert({
+      customUI: ({ onClose }) => {
+        return (
+          <AlertContainer>
+            <AlertBox>
+              <p>{`Möchtest du ${name} löschen?`}</p>
+              <ButtonContainer2>
+                <button
+                  onClick={() => {
+                    deleteCoffee();
+                    onClose();
+                  }}
+                >
+                  Ja, kipp ihn weg!
+                </button>
+                <button onClick={onClose}>Nö, trink ich noch!</button>
+              </ButtonContainer2>
+            </AlertBox>
+          </AlertContainer>
+        );
+      },
+    });
+  };
+
   return (
     <ButtonContainer>
-      <StyledButton type="button" onClick={deleteCoffee}>
+      <StyledButton type="button" onClick={submit}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
@@ -47,4 +73,32 @@ const StyledButton = styled.button`
   align-items: center;
   display: flex;
   justify-content: center;
+`;
+
+const AlertContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+`;
+
+const AlertBox = styled.div`
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  width: 80%;
+  max-width: 400px;
+  background-color: rgba(255, 0, 0, 0.9);
+`;
+
+const ButtonContainer2 = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
 `;
