@@ -32,7 +32,7 @@ export default async function handler(request, response) {
       await Coffee.findByIdAndDelete(id);
       response.status(200).json({ status: `Coffee ${id} deleted` });
     } catch (error) {
-      res.status(500).json({ error: "failed to load data" });
+      res.status(500).json({ error: error.message });
     }
   }
 }
