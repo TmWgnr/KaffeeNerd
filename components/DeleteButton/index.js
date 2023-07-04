@@ -13,10 +13,10 @@ export default function DeleteButton({ id, name }) {
       await fetch(`/api/coffees/${id}`, {
         method: "DELETE",
       });
+      router.push(`/`);
     } catch (error) {
       return { error: error.message };
     }
-    router.push(`/`);
   }
 
   const submit = () => {
