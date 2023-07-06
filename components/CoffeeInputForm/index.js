@@ -4,6 +4,8 @@ import { uid } from "uid";
 import CoffeeCard from "../CoffeeCard";
 import { useRouter } from "next/router";
 import useSWR, { mutate } from "swr";
+import BackgroundImage from "../BackgroundImage";
+import AppHeader from "../AppHeader";
 
 export default function CoffeeInputForm({
   addCoffee,
@@ -136,221 +138,310 @@ export default function CoffeeInputForm({
   };
 
   return (
-    <FormContainer>
-      <Form onSubmit={onSubmit}>
-        <Label htmlFor="name">Name:</Label>
-        <Input
-          id="name"
-          name="name"
-          type="input"
-          maxLength={30}
-          defaultValue={defaultData?.name}
-          required
-        />
-
-        {origins.map((oneOrigins, index) => (
-          <div key={index}>
-            <Label>Herkunft:</Label>
-            <Input
-              name={`oneOrigins-${index}`}
+    <StyledContainer1>
+      <FormContainer>
+        <form onSubmit={onSubmit}>
+          <StyledContainer2>
+            <StyledCategoryLabel htmlFor="name">Name:</StyledCategoryLabel>
+            <StyledInput
+              id="name"
+              name="name"
               type="input"
-              id={`oneOrigins-${index}`}
-              onChange={(event) => handleOneOriginsChange(event, index)}
               maxLength={30}
-              defaultValue={defaultData?.origins[index] || ""}
+              defaultValue={defaultData?.name}
               required
             />
+          </StyledContainer2>
+          <StyledContainer2>
+            <StyledCategoryLabel>Herkunft:</StyledCategoryLabel>
+            {origins.map((oneOrigins, index) => (
+              <div key={index}>
+                <StyledInputContainer>
+                  <StyledInput1
+                    name={`oneOrigins-${index}`}
+                    type="input"
+                    id={`oneOrigins-${index}`}
+                    onChange={(event) => handleOneOriginsChange(event, index)}
+                    maxLength={30}
+                    defaultValue={defaultData?.origins[index] || ""}
+                    required
+                  />
+                  {origins.length - 1 === index && origins.length < 4 && (
+                    <Button type="button" onClick={handleOneOriginsAdd}>
+                      <span>+</span>
+                    </Button>
+                  )}
+                  {origins.length > 1 && (
+                    <Button
+                      type="button"
+                      onClick={() => handleOneOriginsRemove(index)}
+                    >
+                      <span>-</span>
+                    </Button>
+                  )}
+                </StyledInputContainer>
+              </div>
+            ))}
+          </StyledContainer2>
+          <StyledContainer2>
+            <StyledCategoryLabel htmlFor="sorts">Sorte:</StyledCategoryLabel>
+            <div>
+              <StyledCategoryLabel htmlFor="arabica">
+                arabica
+                <StyledInput
+                  type="checkbox"
+                  id="robusta"
+                  name="arabica"
+                  checked={arabicaChecked}
+                  onChange={handleArabicaChange}
+                />
+              </StyledCategoryLabel>
 
-            {origins.length - 1 === index && origins.length < 4 && (
-              <Button type="button" onClick={handleOneOriginsAdd}>
-                <span>+</span>
-              </Button>
-            )}
-            {origins.length > 1 && (
-              <Button
-                type="button"
-                onClick={() => handleOneOriginsRemove(index)}
+              <StyledCategoryLabel htmlFor="robusta">
+                robusta
+                <StyledInput
+                  type="checkbox"
+                  id="robusta"
+                  name="robusta"
+                  checked={robustaChecked}
+                  onChange={handleRobustaChange}
+                />
+              </StyledCategoryLabel>
+            </div>
+          </StyledContainer2>
+          <StyledContainer2>
+            <StyledCategoryLabel htmlFor="aroma">Aroma:</StyledCategoryLabel>
+            <div>
+              <StyledCategoryLabel htmlFor="aroma">
+                beerig/fruchtig
+                <StyledInput
+                  type="radio"
+                  value="beerig/fruchtig"
+                  defaultValue={defaultData?.aroma}
+                  id="aroma"
+                  checked={aroma[0] === "beerig/fruchtig"}
+                  onChange={onAromaChange}
+                />
+              </StyledCategoryLabel>
+              <StyledCategoryLabel htmlFor="aroma">
+                nussig/schokoladig
+                <StyledInput
+                  type="radio"
+                  value="nussig/schokoladig"
+                  defaultValue={defaultData?.aroma}
+                  id="aroma"
+                  checked={aroma[0] === "nussig/schokoladig"}
+                  onChange={onAromaChange}
+                />
+              </StyledCategoryLabel>
+            </div>
+          </StyledContainer2>
+          <StyledContainer2>
+            <StyledCategoryLabel htmlFor="grind">Mahlgrad:</StyledCategoryLabel>
+            <StyledInput
+              placeholder="nenne deinen Mahlgrad z.B.: 2,6"
+              id="grind"
+              name="grind"
+              type="number"
+              max="20.1"
+              step=".1"
+              defaultValue={defaultData?.grind}
+              required
+            />
+          </StyledContainer2>
+          <StyledContainer2>
+            <StyledCategoryLabel htmlFor="inout">IN/OUT:</StyledCategoryLabel>
+            <div>
+              <StyledSelect
+                name="inout"
+                id="inout"
+                value={grams}
+                defaultValue={defaultData?.grams}
+                onChange={handleGramsChange}
+                required
               >
-                <span>-</span>
-              </Button>
-            )}
-          </div>
-        ))}
+                <option value="">--</option>
+                <option value="8">8g</option>
+                <option value="9">9g</option>
+                <option value="10">10g</option>
+                <option value="17">17g</option>
+                <option value="18">18g</option>
+                <option value="19">19g</option>
+              </StyledSelect>
 
-        <Label htmlFor="sorts">Sorte:</Label>
+              <StyledSelect
+                id="inout"
+                value={milliliters}
+                defaultValue={defaultData?.milliliters}
+                onChange={handleMillilitersChange}
+                required
+              >
+                <option value="">--</option>
+                <option value="22">22ml</option>
+                <option value="24">24ml</option>
+                <option value="26">26ml</option>
+                <option value="42">42ml</option>
+                <option value="45">45ml</option>
+                <option value="50">50ml</option>
+              </StyledSelect>
+            </div>
+          </StyledContainer2>
+          <StyledContainer2>
+            <StyledCategoryLabel htmlFor="shop">Shop:</StyledCategoryLabel>
+            <StyledInput
+              id="shop"
+              name="shop"
+              type="input"
+              required
+              defaultValue={defaultData?.shop}
+            />
+          </StyledContainer2>
+          <ButtonContainer>
+            <Button1 type="submit" disabled={!isFormValid()}>
+              {defaultData ? "ändern" : "hinzufügen"}
+            </Button1>
+            <Button1 type="reset" onClick={handleResetButton}>
+              abbrechen
+            </Button1>
+          </ButtonContainer>
+        </form>
+
         <div>
-          <label htmlFor="arabica">
-            arabica
-            <Input
-              type="checkbox"
-              id="robusta"
-              name="arabica"
-              checked={arabicaChecked}
-              onChange={handleArabicaChange}
+          {coffeeEntries.map((coffee) => (
+            <CoffeeCard
+              key={coffee.id}
+              name={coffee.name}
+              origins={coffee.origins}
+              sorts={coffee.sorts}
+              aroma={coffee.aroma}
+              grind={coffee.grind}
+              grams={coffee.grams}
+              milliliters={coffee.milliliters}
+              shop={coffee.shop}
             />
-          </label>
-          <label htmlFor="robusta">
-            robusta
-            <Input
-              type="checkbox"
-              id="robusta"
-              name="robusta"
-              checked={robustaChecked}
-              onChange={handleRobustaChange}
-            />
-          </label>
+          ))}
         </div>
-
-        <Label htmlFor="aroma">Aroma:</Label>
-        <div>
-          <label htmlFor="aroma">
-            beerig/fruchtig
-            <Input
-              type="radio"
-              value="beerig/fruchtig"
-              defaultValue={defaultData?.aroma}
-              id="aroma"
-              checked={aroma[0] === "beerig/fruchtig"}
-              onChange={onAromaChange}
-            />
-          </label>
-          <label htmlFor="aroma">
-            nussig/schokoladig
-            <Input
-              type="radio"
-              value="nussig/schokoladig"
-              defaultValue={defaultData?.aroma}
-              id="aroma"
-              checked={aroma[0] === "nussig/schokoladig"}
-              onChange={onAromaChange}
-            />
-          </label>
-        </div>
-
-        <Label htmlFor="grind">Mahlgrad:</Label>
-        <Input
-          placeholder="nenne deinen Mahlgrad z.B.: 2,6"
-          id="grind"
-          name="grind"
-          type="number"
-          max="20.1"
-          step=".1"
-          defaultValue={defaultData?.grind}
-          required
-        />
-
-        <Label htmlFor="inout">IN/OUT:</Label>
-        <div>
-          <select
-            name="inout"
-            id="inout"
-            value={grams}
-            defaultValue={defaultData?.grams}
-            onChange={handleGramsChange}
-            required
-          >
-            <option value="">--</option>
-            <option value="8">8g</option>
-            <option value="9">9g</option>
-            <option value="10">10g</option>
-            <option value="17">17g</option>
-            <option value="18">18g</option>
-            <option value="19">19g</option>
-          </select>
-
-          <select
-            id="inout"
-            value={milliliters}
-            defaultValue={defaultData?.milliliters}
-            onChange={handleMillilitersChange}
-            required
-          >
-            <option value="">--</option>
-            <option value="22">22ml</option>
-            <option value="24">24ml</option>
-            <option value="26">26ml</option>
-            <option value="42">42ml</option>
-            <option value="45">45ml</option>
-            <option value="50">50ml</option>
-          </select>
-        </div>
-
-        <Label htmlFor="shop">Shop:</Label>
-        <Input
-          id="shop"
-          name="shop"
-          type="input"
-          required
-          defaultValue={defaultData?.shop}
-        />
-
-        <ButtonContainer>
-          <Button type="submit" disabled={!isFormValid()}>
-            {defaultData ? "Update coffee" : "hinzufügen"}
-          </Button>
-          <Button type="reset" onClick={handleResetButton}>
-            abbrechen
-          </Button>
-        </ButtonContainer>
-      </Form>
-
-      <div>
-        {coffeeEntries.map((coffee) => (
-          <CoffeeCard
-            key={coffee.id}
-            name={coffee.name}
-            origins={coffee.origins}
-            sorts={coffee.sorts}
-            aroma={coffee.aroma}
-            grind={coffee.grind}
-            grams={coffee.grams}
-            milliliters={coffee.milliliters}
-            shop={coffee.shop}
-          />
-        ))}
-      </div>
-    </FormContainer>
+      </FormContainer>
+      <BackgroundImage />
+    </StyledContainer1>
   );
 }
+
+const StyledBackground = styled.div`
+  background-color: #333333;
+`;
+
+const StyledImage = styled.image``;
+
+const StyledContainer1 = styled.div`
+  top: 20%;
+
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  margin: 150px 15px 10px 15px;
+  padding: 10px;
+`;
+
+const StyledContainer2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: lightgrey;
+  opacity: 0.6;
+
+  border-radius: 8px;
+  padding: 1px;
+  margin: 10px 0px 10px 0px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+
+  width: 100%;
+  font-weight: bold;
+  font-size: 80%;
+  color: lightgrey;
+`;
+
+const StyledName = styled.h1`
+  display: flex;
+  justify-content: center;
+  color: black;
+`;
+
+const StyledInputContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const StyledInput1 = styled.input`
+  margin: 0;
+  border-radius: 5px;
+  width: 80%;
+  border: solid black 1px;
+  background-color: lightgrey;
+  margin: 5px;
+  align-items: center;
+  flex-grow: 1;
+`;
+
+const StyledCategoryLabel = styled.label`
+  margin: 0;
+  font-size: 70%;
+  color: black;
+  align-self: flex-start;
+  padding-left: 10px;
+`;
+
+const StyledInput = styled.input`
+  margin: 0;
+  border-radius: 5px;
+  border: solid black 1px;
+  background-color: lightgrey;
+
+  margin: 5px;
+  align-items: center;
+`;
+
+const StyledSelect = styled.select`
+  margin: 0;
+  border-radius: 5px;
+  border: solid black 1px;
+  background-color: lightgrey;
+
+  color: black;
+  margin: 5px;
+  align-items: center;
+`;
 
 const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 50px;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 1rem;
-`;
-
-const Label = styled.label`
-  margin-bottom: 0.5rem;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  padding: 0.5rem;
-  font-size: 1rem;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  accent-color: black;
+  color: black;
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
-  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const Button = styled.button`
-  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
+  margin: 0.3rem 0.3rem 0.2rem 0.3rem;
+  background-color: lightgrey;
+  color: black;
+  border: none;
+  cursor: pointer;
+`;
+
+const Button1 = styled.button`
+  padding: 0.5rem 0.5rem;
   font-size: 1rem;
-  border-radius: 4px;
-  background-color: black;
-  color: white;
+  background-color: transparent;
+  color: lightgrey;
+  opacity: 0.8;
   border: none;
   cursor: pointer;
 `;

@@ -27,15 +27,17 @@ export default function DeleteButton({ id, name }) {
             <AlertBox>
               <p>{`Möchtest du ${name} löschen?`}</p>
               <ButtonContainer2>
-                <button
+                <StyledAlertButton
                   onClick={() => {
                     deleteCoffee();
                     onClose();
                   }}
                 >
                   Ja, kipp ihn weg!
-                </button>
-                <button onClick={onClose}>Nö, trink ich noch!</button>
+                </StyledAlertButton>
+                <StyledAlertButton onClick={onClose}>
+                  Nö, trink ich noch!
+                </StyledAlertButton>
               </ButtonContainer2>
             </AlertBox>
           </AlertContainer>
@@ -62,9 +64,8 @@ const ButtonContainer = styled.div`
 
 const StyledButton = styled.button`
   background-color: transparent;
-  border: none;
-  color: grey;
-  align-items: center;
+  border: black;
+  color: white;
   display: flex;
   justify-content: center;
 `;
@@ -82,17 +83,26 @@ const AlertContainer = styled.div`
 `;
 
 const AlertBox = styled.div`
-  background-color: #fff;
+  background-color: #c18050;
+  opacity: 0.9;
   border-radius: 5px;
   padding: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   width: 80%;
   max-width: 400px;
-  background-color: rgba(255, 0, 0, 0.9);
+  color: white;
 `;
 
 const ButtonContainer2 = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
+`;
+
+const StyledAlertButton = styled.button`
+  background-color: #000000;
+  opacity: 0.9;
+  border: none;
+  border-radius: 5px;
+  color: lightgrey;
 `;

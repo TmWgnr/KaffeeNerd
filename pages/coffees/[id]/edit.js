@@ -3,6 +3,7 @@ import Link from "next/link";
 import useSWR from "swr";
 import CoffeeInputForm from "../../../components/CoffeeInputForm/index.js";
 import AppHeader from "../../../components/AppHeader/index.js";
+import Footer from "../../../components/Footer/index.js";
 
 export default function EditPage() {
   const router = useRouter();
@@ -26,7 +27,7 @@ export default function EditPage() {
     if (response.ok) {
       mutate();
     }
-    router.push(`/coffees/${id}`);
+    router.push(`/listpage`);
   }
 
   if (!isReady || isLoading || error) return <h2>Loading...</h2>;
@@ -35,14 +36,12 @@ export default function EditPage() {
     <>
       <AppHeader>Alte Bohne Neuer Wert</AppHeader>
 
-      <Link href={`/coffees/${id}`} passHref legacyBehavior>
-        <Link justifyself="start">back</Link>
-      </Link>
       <CoffeeInputForm
         editCoffee={editCoffee}
         formName={"edit-coffee"}
         defaultData={coffee}
       />
+      <Footer />
     </>
   );
 }

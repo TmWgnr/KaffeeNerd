@@ -17,7 +17,7 @@ export default function ListPage() {
   } else {
     return (
       <main>
-        <AppHeader>Kaffeesorten</AppHeader>
+        <AppHeader>DIE BOHNEN</AppHeader>
         <CreateButton />
         <CoffeeList coffees={coffees} />
         <Footer />
