@@ -26,7 +26,7 @@ export default function DetailsPage() {
         <StyledCategory>
           <StyledCategoryLabel>Herkunft</StyledCategoryLabel>
           {coffee.origins.map((oneOrigin, index) => (
-            <StyledParagraph key={index}> {oneOrigin}</StyledParagraph>
+            <StyledParagraph key={oneOrigin}> {oneOrigin}</StyledParagraph>
           ))}
         </StyledCategory>
       </StyledSection>
@@ -34,7 +34,7 @@ export default function DetailsPage() {
         <StyledCategory>
           <StyledCategoryLabel>Sorte</StyledCategoryLabel>
           {coffee.sorts.map((oneSort, index) => (
-            <StyledParagraph key={index}> {oneSort}</StyledParagraph>
+            <StyledParagraph key={oneSort}> {oneSort}</StyledParagraph>
           ))}
         </StyledCategory>
       </StyledSection>
@@ -43,7 +43,7 @@ export default function DetailsPage() {
           <StyledCategoryLabel>Aroma</StyledCategoryLabel>
 
           {coffee.aroma.map((oneAroma, index) => (
-            <StyledParagraph key={index}> {oneAroma}</StyledParagraph>
+            <StyledParagraph key={oneAroma}> {oneAroma}</StyledParagraph>
           ))}
         </StyledCategory>
       </StyledSection>

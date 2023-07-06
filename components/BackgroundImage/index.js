@@ -16,7 +16,7 @@ const StyledBackgroundImage = styled.img`
 export default function BackgroundImage() {
   return (
     <div>
-      <StyledBackgroundImage src="/kaffeebohne.jpg" alt="espressobeans" />
+      <StyledBackgroundImage src="/KAFFEBOHNE.jpg" alt="espressobeans" />
     </div>
   );
 }
