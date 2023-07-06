@@ -8,16 +8,15 @@ const StyledBackgroundImage = styled.img`
   top: 0;
   left: 0;
   z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
 
 export default function BackgroundImage() {
   return (
     <div>
-      <StyledBackgroundImage
-        src="/kaffeebohne.jpg"
-        alt="espressobeans"
-        style={{ width: "100%", height: "100%", objectFit: "cover" }}
-      />
+      <StyledBackgroundImage src="/kaffeebohne.jpg" alt="espressobeans" />
     </div>
   );
 }

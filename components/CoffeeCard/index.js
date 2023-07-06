@@ -25,7 +25,10 @@ export default function CoffeeCard({
         <StyledCategory>
           <StyledCategoryLabel>Herkunft</StyledCategoryLabel>
           {origins.map((oneOrigin, index) => (
-            <StyledParagraph key={index}> {oneOrigin}</StyledParagraph>
+            <StyledParagraph key={`${oneOrigin}-${index}`}>
+              {" "}
+              {oneOrigin}
+            </StyledParagraph>
           ))}
         </StyledCategory>
       </StyledSection>
@@ -33,7 +36,7 @@ export default function CoffeeCard({
         <StyledCategory>
           <StyledCategoryLabel>Sorte</StyledCategoryLabel>
           {sorts.map((oneSort, index) => (
-            <StyledParagraph key={index}> {oneSort}</StyledParagraph>
+            <StyledParagraph key={oneSort}> {oneSort}</StyledParagraph>
           ))}
         </StyledCategory>
       </StyledSection>
@@ -42,7 +45,7 @@ export default function CoffeeCard({
           <StyledCategoryLabel>Aroma</StyledCategoryLabel>
 
           {aroma.map((oneAroma, index) => (
-            <StyledParagraph key={index}> {oneAroma}</StyledParagraph>
+            <StyledParagraph key={oneAroma}> {oneAroma}</StyledParagraph>
           ))}
         </StyledCategory>
       </StyledSection>
