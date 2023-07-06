@@ -32,13 +32,15 @@ export default function CreateButton() {
 
 const ButtonContainer = styled.div`
   display: flex;
+
   justify-content: center;
-  margin-bottom: 100px;
+  margin-top: 100px;
   align-items: center;
 `;
 
 const StyledButton = styled.button`
   background-color: transparent;
+  position: sticky;
   border: none;
   color: grey;
   align-items: center;

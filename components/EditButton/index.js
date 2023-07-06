@@ -28,6 +28,8 @@ export default function EditButton({ id }) {
 
 const StyledButton = styled.button`
   background-color: transparent;
-  display: flex;
   border: none;
+  color: white;
+  display: flex;
+  justify-content: center;
 `;
