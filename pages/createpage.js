@@ -1,12 +1,10 @@
 import { useRouter } from "next/router";
 import AppHeader from "../components/AppHeader";
 import CoffeeInputForm from "../components/CoffeeInputForm";
-import CoffeeList from "../components/CoffeeList";
+
 import Footer from "../components/Footer";
-import Link from "next/link";
-import styled from "styled-components";
+
 import useSWR from "swr";
-import EditButton from "../components/EditButton";
 
 export default function CreateCoffeePage() {
   const router = useRouter();

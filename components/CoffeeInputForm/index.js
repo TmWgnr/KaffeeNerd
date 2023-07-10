@@ -3,9 +3,8 @@ import { useState } from "react";
 import { uid } from "uid";
 import CoffeeCard from "../CoffeeCard";
 import { useRouter } from "next/router";
-import useSWR, { mutate } from "swr";
+
 import BackgroundImage from "../BackgroundImage";
-import AppHeader from "../AppHeader";
 
 export default function CoffeeInputForm({
   addCoffee,

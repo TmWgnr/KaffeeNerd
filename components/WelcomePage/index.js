@@ -18,7 +18,7 @@ export default function WelcomePage() {
   return (
     <>
       <AppHeader>KAFFEENERD</AppHeader>
-      <StyledGreeting>CIAO!</StyledGreeting>
+
       <Footer />
     </>
   );
