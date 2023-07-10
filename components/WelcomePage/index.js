@@ -9,7 +9,8 @@ const StyledGreeting = styled.h2`
   width: 100%;
   position: absolute;
   bottom: 0;
-  color: #333232;
+  color: #d3d3d3;
+  opacity: 0.7;
   font-size: 90px;
 `;
 

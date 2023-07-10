@@ -2,9 +2,10 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 
 const StyledButton = styled.button`
-  background-color: black;
-  border: 1px solid black;
-  color: whitesmoke;
+  background-color: ${(page) => (page.active ? "#d3d3d3" : "#000000")};
+  border: solid transparent 1px;
+  color: ${(page) => (page.active ? "#000000" : "#d3d3d3")};
+  opacity: 0.7;
   border-radius: 5px;
   width: 100px;
   height: 50px;
@@ -16,10 +17,16 @@ const StyledButton = styled.button`
 
 export default function ListButton() {
   const router = useRouter();
+  console.log(router.pathname);
+  const isActive = router.pathname === "/listpage";
 
   function handleClick() {
-    router.push("/listpage/");
+    router.push("/listpage");
   }
 
-  return <StyledButton onClick={handleClick}>Liste</StyledButton>;
+  return (
+    <StyledButton active={isActive} onClick={handleClick}>
+      Liste
+    </StyledButton>
+  );
 }
