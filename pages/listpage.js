@@ -18,7 +18,7 @@ export default function ListPage() {
     return (
       <main>
         <AppHeader>DIE BOHNEN</AppHeader>
-        <CreateButton />
+
         <CoffeeList coffees={coffees} />
         <Footer />
       </main>

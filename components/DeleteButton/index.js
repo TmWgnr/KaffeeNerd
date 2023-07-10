@@ -13,7 +13,7 @@ export default function DeleteButton({ id, name }) {
       await fetch(`/api/coffees/${id}`, {
         method: "DELETE",
       });
-      router.push(`/`);
+      router.push(`/listpage`);
     } catch (error) {
       return { error: error.message };
     }
