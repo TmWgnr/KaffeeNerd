@@ -64,8 +64,8 @@ const ButtonContainer = styled.div`
 
 const StyledButton = styled.button`
   background-color: transparent;
-  border: black;
-  color: white;
+  border: #000000;
+  color: #ffffff;
   display: flex;
   justify-content: center;
 `;
@@ -90,7 +90,7 @@ const AlertBox = styled.div`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   width: 80%;
   max-width: 400px;
-  color: white;
+  color: #ffffff;
 `;
 
 const ButtonContainer2 = styled.div`
@@ -104,5 +104,5 @@ const StyledAlertButton = styled.button`
   opacity: 0.9;
   border: none;
   border-radius: 5px;
-  color: lightgrey;
+  color: #d3d3d3;
 `;

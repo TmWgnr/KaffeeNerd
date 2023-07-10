@@ -6,7 +6,6 @@ const StyledList = styled.ul`
   display: flex;
   flex-direction: column;
   padding: 0;
-  margin-bottom: 100px;
 `;
 
 export default function CoffeeList({ coffees }) {

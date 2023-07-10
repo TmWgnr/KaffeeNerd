@@ -327,45 +327,31 @@ export default function CoffeeInputForm({
   );
 }
 
-const StyledBackground = styled.div`
-  background-color: #333333;
-`;
-
-const StyledImage = styled.image``;
-
 const StyledContainer1 = styled.div`
   top: 20%;
-
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
     rgba(0, 0, 0, 0.22) 0px 10px 10px;
-  margin: 150px 15px 10px 15px;
   padding: 10px;
+  margin-top: 160px;
+  margin-bottom: 50px;
 `;
 
 const StyledContainer2 = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: lightgrey;
+  background-color: #d3d3d3;
   opacity: 0.6;
-
   border-radius: 8px;
   padding: 1px;
   margin: 10px 0px 10px 0px;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
     rgba(0, 0, 0, 0.22) 0px 10px 10px;
-
   width: 100%;
   font-weight: bold;
   font-size: 80%;
-  color: lightgrey;
-`;
-
-const StyledName = styled.h1`
-  display: flex;
-  justify-content: center;
-  color: black;
+  color: #d3d3d3;
 `;
 
 const StyledInputContainer = styled.div`
@@ -378,7 +364,7 @@ const StyledInput1 = styled.input`
   border-radius: 5px;
   width: 80%;
   border: solid black 1px;
-  background-color: lightgrey;
+  background-color: #d3d3d3;
   margin: 5px;
   align-items: center;
   flex-grow: 1;
@@ -387,7 +373,7 @@ const StyledInput1 = styled.input`
 const StyledCategoryLabel = styled.label`
   margin: 0;
   font-size: 70%;
-  color: black;
+  color: #000000;
   align-self: flex-start;
   padding-left: 10px;
 `;
@@ -396,19 +382,18 @@ const StyledInput = styled.input`
   margin: 0;
   border-radius: 5px;
   border: solid black 1px;
-  background-color: lightgrey;
-
+  background-color: #d3d3d3;
   margin: 5px;
   align-items: center;
+  accent-color: black;
 `;
 
 const StyledSelect = styled.select`
   margin: 0;
   border-radius: 5px;
   border: solid black 1px;
-  background-color: lightgrey;
-
-  color: black;
+  background-color: #d3d3d3;
+  color: #000000;
   margin: 5px;
   align-items: center;
 `;
@@ -418,7 +403,7 @@ const FormContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 50px;
-  color: black;
+  color: #000000;
 `;
 
 const ButtonContainer = styled.div`
@@ -430,8 +415,8 @@ const ButtonContainer = styled.div`
 const Button = styled.button`
   font-size: 1.5rem;
   margin: 0.3rem 0.3rem 0.2rem 0.3rem;
-  background-color: lightgrey;
-  color: black;
+  background-color: #d3d3d3;
+  color: #000000;
   border: none;
   cursor: pointer;
 `;
@@ -440,7 +425,7 @@ const Button1 = styled.button`
   padding: 0.5rem 0.5rem;
   font-size: 1rem;
   background-color: transparent;
-  color: lightgrey;
+  color: #d3d3d3;
   opacity: 0.8;
   border: none;
   cursor: pointer;
