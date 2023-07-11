@@ -1,9 +1,6 @@
 import AppHeader from "../components/AppHeader";
 import CoffeeList from "../components/CoffeeList";
-import CreateButton from "../components/CreateButton";
 import Footer from "../components/Footer";
-import { useRouter } from "next/router";
-import EditButton from "../components/EditButton";
 import useSWR from "swr";
 import styled from "styled-components";
 import CreateButton2 from "../components/CreateButton";
