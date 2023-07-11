@@ -10,7 +10,6 @@ export default function ListPage() {
   const { data: coffees, isLoading } = useSWR("/api/coffees", {
     fallbackData: [],
   });
-  console.log(coffees);
 
   if (isLoading) {
     return <div>is loading</div>;

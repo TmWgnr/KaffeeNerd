@@ -6,12 +6,12 @@ import CreateButton from "../CreateButton";
 
 const StyledFooter = styled.footer`
   position: fixed;
-  background-color: black;
-  opacity: 0.7;
+  background-color: #d3d3d3;
+  opacity: 0.6;
+  color: #000000;
   left: 0;
   bottom: 0;
   width: 100%;
-  color: white;
   text-align: center;
 `;
 
