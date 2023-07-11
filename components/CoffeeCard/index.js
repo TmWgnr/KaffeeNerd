@@ -82,7 +82,7 @@ const StyledContainer = styled.div`
     rgba(0, 0, 0, 0.22) 0px 10px 10px;
 `;
 
-const StyledName = styled.h1`
+const StyledName = styled.h2`
   display: flex;
   justify-content: center;
   color: #d3d3d3;
