@@ -143,7 +143,6 @@ export default function CoffeeInputForm({
           <StyledContainer2>
             <StyledCategoryLabel htmlFor="name">Name:</StyledCategoryLabel>
             <StyledInput
-              data-testid="name"
               id="name"
               name="name"
               type="input"
@@ -305,6 +304,22 @@ export default function CoffeeInputForm({
             </Button1>
           </ButtonContainer>
         </form>
+
+        <div>
+          {coffeeEntries.map((coffee) => (
+            <CoffeeCard
+              key={coffee.id}
+              name={coffee.name}
+              origins={coffee.origins}
+              sorts={coffee.sorts}
+              aroma={coffee.aroma}
+              grind={coffee.grind}
+              grams={coffee.grams}
+              milliliters={coffee.milliliters}
+              shop={coffee.shop}
+            />
+          ))}
+        </div>
       </FormContainer>
       <BackgroundImage />
     </StyledContainer1>
