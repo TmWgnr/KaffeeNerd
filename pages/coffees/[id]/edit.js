@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import Link from "next/link";
 import useSWR from "swr";
 import CoffeeInputForm from "../../../components/CoffeeInputForm/index.js";
 import AppHeader from "../../../components/AppHeader/index.js";

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { useRouter } from "next/router";
-import useSWR from "swr";
 import React from "react";
 import { confirmAlert } from "react-confirm-alert";
 import DeleteIcon from "../DeleteIcon";
