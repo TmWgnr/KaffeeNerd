@@ -143,6 +143,7 @@ export default function CoffeeInputForm({
           <StyledContainer2>
             <StyledCategoryLabel htmlFor="name">Name:</StyledCategoryLabel>
             <StyledInput
+              data-testid="name"
               id="name"
               name="name"
               type="input"
