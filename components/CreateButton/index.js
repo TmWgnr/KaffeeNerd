@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 
 const StyledButton = styled.button`
   color: ${(page) => (page.active ? "#A9A9A9" : "#000000")};
-
   background-color: transparent;
   border: none;
   width: 100px;
